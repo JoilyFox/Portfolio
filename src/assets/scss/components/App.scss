@@ -1,0 +1,22 @@
+main {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;    
+}
+
+.left-side {
+    background-color: $primary-black;
+    z-index: 1;
+    display: flex;
+    height: 100%;
+    transition: .3s ease-in-out;
+
+    &.compact-nav {
+        flex: 0 1 20%;
+        clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+    }
+    &.full-nav {
+        flex: 0 1 55%;
+        clip-path: polygon(0 0, 0 100%, 80% 100%, 100% 0);
+    }
+}

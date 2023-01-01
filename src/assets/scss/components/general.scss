@@ -1,0 +1,10 @@
+* {
+    font-family: $primary-font;
+}
+
+html, body, #app {
+    background-color: $primary-white;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+}

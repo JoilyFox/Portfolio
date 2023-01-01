@@ -1,21 +1,26 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import SideMenu from "./components/SideMenu.vue";
-</script>
-
 <template>
-
-  <div class="menu-part">
-    <SideMenu></SideMenu>
-  </div>
-  <div class="content-part">
-    <div class="wrapper">
-      <router-view></router-view>
+  <main>
+    <div :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
+      <SideMenu @changeMenuForm="changeMenuForm"></SideMenu>
     </div>
-  </div>
-
-  <RouterView />
+    <div class="right-side side">
+      <div class="wrapper">
+        <router-view></router-view>
+      </div>
+    </div>
+  </main>
 </template>
 
-<style scoped>
-</style>
+<script setup lang="ts">
+  import SideMenu from "./components/SideMenu.vue";
+  import { RouterLink, RouterView } from "vue-router";
+  import { ref } from "@vue/reactivity";
+
+  let isMenuCompact = ref(false);
+
+  function changeMenuForm(val: boolean) {
+    isMenuCompact.value = val;
+  }
+
+
+</script>

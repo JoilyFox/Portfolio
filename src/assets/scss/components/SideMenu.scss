@@ -1,0 +1,36 @@
+.main-nav {
+    display: flex;
+    flex-direction: column;
+    margin-left: 50px;
+    margin-top: 30px;
+
+    &-item {
+        font-weight: 300;
+        font-size: 20px;
+        color: $primary-white;
+        opacity: .3;
+        padding: 7px;
+        text-decoration: none;
+        transition: opacity .1s, font-weight .3s;
+
+        &:hover { opacity: .5; }
+        &:active { opacity: .25; }
+
+        &.logo {
+            padding-left: 20px;
+            opacity: 1 !important;
+
+            img {
+                width: 40px;
+            }
+
+            &:active { opacity: .5 !important; }
+        }
+
+        &.router-link-active,
+        &.router-link-exact-active {
+            opacity: .7;
+            font-weight: 500;
+        }
+    }
+}
