@@ -1,6 +1,6 @@
 <template>
-  <section class="my-works-section">
-    <div class="container"></div>
+  <section>
+    <p>contacts</p>
   </section>
 </template>
 

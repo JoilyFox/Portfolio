@@ -3,15 +3,17 @@
     flex-direction: column;
     margin-left: 50px;
     margin-top: 30px;
+    transition: .3s;
 
     &-item {
         font-weight: 300;
-        font-size: 20px;
+        font-size: 22px;
         color: $primary-white;
         opacity: .3;
         padding: 7px;
         text-decoration: none;
-        transition: opacity .1s, font-weight .3s;
+        transition: opacity .1s, font-weight .1s;
+        transition-timing-function: ease-in-out;
 
         &:hover { opacity: .5; }
         &:active { opacity: .25; }
@@ -21,7 +23,7 @@
             opacity: 1 !important;
 
             img {
-                width: 40px;
+                width: 55px;
             }
 
             &:active { opacity: .5 !important; }
@@ -30,7 +32,69 @@
         &.router-link-active,
         &.router-link-exact-active {
             opacity: .7;
-            font-weight: 500;
+            font-weight: 600;
         }
+    }
+}
+
+
+// --- Medias --- //
+
+// Desktop
+
+@media screen and (max-width: 1500px) {
+
+}
+
+// Tablet
+
+@media screen and (max-width: 1023px) {
+    .main-nav.compactMobile {
+        margin: 0;
+        flex-direction: row;
+        align-items: center;
+
+        .main-nav-item {
+            font-size: 18px;
+            margin-right: 0px;
+            padding: 20px 10px;
+
+            .main-nav-item:last-child {
+                margin-right: 0;
+            }
+
+            &.logo {
+                margin-bottom: -7px;
+                margin-right: 5px;
+                padding: 10px 10px;
+
+                img {
+                    width: 31px;
+                }
+            }
+        }
+    }
+
+    .main-nav {
+        margin-top: 20px;
+
+        &-item {
+            &.logo img {
+                width: 40px;
+            }
+        }
+    }
+}
+
+// Smartfone
+
+@media screen and (max-width: 767px) {
+
+}
+
+@media screen and (max-width: 400px) {
+    .main-nav {
+        align-items: center;
+        margin-left: 0;
     }
 }

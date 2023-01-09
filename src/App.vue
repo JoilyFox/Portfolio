@@ -1,7 +1,17 @@
 <template>
   <main>
+    <div class="transition-container"></div>
     <div :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
-      <SideMenu @changeMenuForm="changeMenuForm"></SideMenu>
+      <!-- Desktop nav -->
+      <SideMenu v-if="isDesktopScreen"></SideMenu>
+
+      <!-- Mobile nav -->
+      <transition name="slide-bottom">
+        <SideMenu v-if="!isMenuCompact && !isDesktopScreen"></SideMenu>
+      </transition>
+      <transition name="slide-right">
+        <SideMenu v-if="isMenuCompact && !isDesktopScreen" :isCompactMobile="true"></SideMenu>
+      </transition>
     </div>
     <div class="right-side side">
       <div class="wrapper">
@@ -13,13 +23,37 @@
 
 <script setup lang="ts">
   import SideMenu from "./components/SideMenu.vue";
-  import { RouterLink, RouterView } from "vue-router";
-  import { ref } from "@vue/reactivity";
+
+  import $ from 'jquery';
+  import { useRouter } from "vue-router";
+  import { ref } from "vue";
 
   let isMenuCompact = ref(false);
+  const router = useRouter();
 
-  function changeMenuForm(val: boolean) {
-    isMenuCompact.value = val;
+  router.afterEach((to) => { 
+    switch (to.path) {
+      case '/':
+        isMenuCompact.value = false;
+        break;
+      case '/my-works':
+        isMenuCompact.value = true;
+        break;
+      case '/contacts':
+        isMenuCompact.value = true;
+        break;
+    }
+  });
+
+  //Rewrite this in helper!!!
+  const isDesktopScreen = ref(checkIsDesktopScreen());
+
+  window.addEventListener('resize', () => { 
+    isDesktopScreen.value = checkIsDesktopScreen() 
+  });
+
+  function checkIsDesktopScreen() {
+    return window.innerWidth > 1023 
   }
 
 

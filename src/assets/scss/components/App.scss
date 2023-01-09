@@ -6,17 +6,89 @@ main {
 
 .left-side {
     background-color: $primary-black;
-    z-index: 1;
     display: flex;
     height: 100%;
-    transition: .3s ease-in-out;
+    transition: .3s ease;
+    z-index: 10;
 
     &.compact-nav {
-        flex: 0 1 20%;
+        flex: 0 1 17%;
         clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
     }
     &.full-nav {
         flex: 0 1 55%;
         clip-path: polygon(0 0, 0 100%, 80% 100%, 100% 0);
     }
+}
+
+.right-side {
+    z-index: 1;
+}
+
+// --- Medias --- //
+
+// Desktop
+
+@media screen and (max-width: 1500px) {
+    .left-side {
+        &.compact-nav {
+            flex-basis: 25%;
+        }
+    }
+}
+
+// Tablet
+
+@media screen and (max-width: 1023px) {
+    main {
+        flex-direction: column;
+    }
+
+    .left-side {
+        &.compact-nav {
+            flex-basis: 65px;
+            clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+        }
+
+        &.full-nav {
+            clip-path: polygon(0 0, 0 100%, 100% 80%, 100% 0);
+        }
+    }
+}
+
+// Smartfone
+
+@media screen and (max-width: 767px) {
+    
+}
+
+@media screen and (max-width: 400px) {
+    .left-side {
+        justify-content: center;
+    }
+}
+
+
+// --- Transitions ---
+
+.slide-right-enter-to, .slide-right-leave-from {
+    transition: all .3s ease;
+    position: absolute;
+    transform: translateX(0px);
+}
+.slide-right-enter-from, .slide-right-leave-to {
+    opacity: 0;
+    position: absolute;
+    transform: translateX(-50px);
+}
+
+.slide-bottom-enter-to, .slide-bottom-leave-from {
+    transition: all .3s ease;
+    position: absolute;
+    transform: translateY(0px);
+}
+.slide-bottom-enter-from, .slide-bottom-leave-to {
+    opacity: 0;
+    position: absolute;
+    transform: translateY(50px);
 }

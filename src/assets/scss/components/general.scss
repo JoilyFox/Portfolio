@@ -6,5 +6,20 @@ html, body, #app {
     background-color: $primary-white;
     height: 100vh;
     width: 100vw;
-    overflow-y: hidden;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    
+}
+
+// Animations 
+
+.fade-enter-active, .fade-leave-active {
+    transition: all .3s ease;
+}
+.fade-enter, .fade-leave-to {
+opacity: 0;
 }
