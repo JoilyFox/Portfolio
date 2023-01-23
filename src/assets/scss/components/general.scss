@@ -11,15 +11,207 @@ html, body, #app {
 
 .container {
     display: flex;
-    justify-content: center;
-    
+    align-items: center;
+    flex-direction: column;
+    flex: 1 1;
+    padding: 0 1.5rem;
 }
+
+section {
+    flex: 1 1;
+    overflow-y: auto;
+}
+
 
 // Animations 
 
-.fade-enter-active, .fade-leave-active {
-    transition: all .3s ease;
+// appearing text underline when hovering text
+.hover-underline-bold {
+    & > *::before {
+        content: "";
+        width: 0;
+        height: 1px;
+        position: absolute;
+        bottom: 3px;
+        left: 50%;
+        background: $paragraph-dark-font;
+        transition: all 0.2s;
+    }
+
+    & > *:hover::before {
+        width: 90%;
+        left: 5%;
+        opacity: .7;
+    }
+    & > *:active::before {
+        width: 70%;
+        left: 15%;
+        opacity: .7;
+    }
+
+    & > *.router-link-active::before,
+    & > *.router-link-exact-active::before {
+        width: 90%;
+        left: 5%;
+        opacity: 1;
+    }
 }
-.fade-enter, .fade-leave-to {
-opacity: 0;
+
+.hover-underline-thin {
+    position: relative;
+    transition: all 0.2s;
+
+    &::before {
+        content: "";
+        width: 100%;
+        height: 0px;
+        position: absolute;
+        bottom: 0px;
+        left: 0%;
+        opacity: 0;
+        transition: all 0.2s;
+        background-color: $paragraph-light-font;
+    }
+
+    &:hover::before {
+        opacity: 1;
+        height: 1px;
+    }
+    &:active::before {
+        width: 90%;
+        left: 5%;
+    }
 }
+
+// appearing black gradient background and text when hovering gallery item
+.hover-gallery {
+    &-container {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    &-item {
+        cursor: pointer;
+        transition: .2s ease;
+        overflow: hidden;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, black, transparent);
+            transform-origin: bottom;
+            z-index: 1;
+            opacity: 0;
+            transition: .3s ease;
+        }
+
+        &-picture-text {
+            transition: .3s ease;
+            z-index: -1;
+            opacity: 0;
+            margin-bottom: -5px;
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            padding: 15px;
+            padding-top: 0;
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            color: $caption-light-font;
+            
+            & * {
+                margin-bottom: 4px;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        .gallery-item {
+            &-img {
+                transition: .6s ease-out;
+            }
+
+            &-caption {
+                font-family: $primary-font;
+                font-size: 16px;
+                cursor: pointer;
+            }
+            &-description {
+                font-family: $paragraph-font;
+                font-size: 13px;
+                color: $paragraph-light-font;
+                cursor: default;
+            }
+            &-tags {
+                font-family: $paragraph-font;
+                font-size: 13px;
+                color: $paragraph-light-font;
+                cursor: pointer;
+            }
+        }
+    }
+
+    &-item:hover {
+
+        &::before {
+            opacity: .7;
+        }
+
+        .hover-gallery-item-picture-text {
+            opacity: 1;
+            z-index: 2;
+            margin: 0;
+        }
+
+        .gallery-item {
+            &-img {
+                transform: scale(1.1);
+            }
+        }
+    }
+
+    //TODO
+    
+    // &-item {
+    //     &:active {
+    //         .gallery-item-img {
+    //             transform: scale(1.05);
+    //             transition: .3s ease;
+    //         } 
+    //     }
+    //     .gallery-item {
+    //         .hover-gallery-item-picture-text + &-img {
+    //             transform: scale(1);
+    //         }
+    //     }
+    // }
+    
+}
+
+// Vue animations
+
+.view-slide-right {
+    $transition: all .2s ease-out;
+
+    &-enter-to, &-leave-from {
+        transition: $transition;
+        opacity: 1;
+    }
+    &-enter-from, &-leave-to {
+        opacity: 0;
+        transition: $transition;
+        transform: translateX(-30px);
+    }
+    &-leave-to {
+        transform: translateX(30px);
+    }
+}
+

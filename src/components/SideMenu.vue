@@ -2,22 +2,25 @@
     <nav class="main-nav nav" :class="{'compactMobile': isCompactMobile}">  
       <router-link
         class="main-nav-item logo"
-        to="/"
+        :to="{ name: 'home' }"
       >
-        <img src="@/assets/scss/img/main-logo.svg" alt="Logo" />
+        <img src="@/assets/img/icons/main-logo.svg" alt="Logo" />
       </router-link>
-      <router-link class="main-nav-item" to="/">
+      <router-link 
+        class="main-nav-item" 
+        :to="{ name: 'home' }"
+      >
         Home
       </router-link>
       <router-link
         class="main-nav-item"
-        to="/my-works"
+        :to="{ name: 'myWorks' }"
       >
         My works
       </router-link>
       <router-link
         class="main-nav-item"
-        to="/contacts"
+        :to="{ name: 'contacts' }"
       >
         Contacts
       </router-link>
@@ -25,12 +28,13 @@
 </template>
 
 <script setup lang="ts">
-import { toRefs } from "vue";
+  import { toRefs } from "vue";
+  import { RouterLink } from 'vue-router'
 
-defineProps({
-  isCompactMobile: {
-    type: Boolean,
-    default: false,
-  },
-})
+  defineProps({
+    isCompactMobile: {
+      type: Boolean,
+      default: false,
+    },
+  })
 </script>

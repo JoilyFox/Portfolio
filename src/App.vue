@@ -1,60 +1,48 @@
 <template>
   <main>
-    <div class="transition-container"></div>
-    <div :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
+    <header :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
       <!-- Desktop nav -->
-      <SideMenu v-if="isDesktopScreen"></SideMenu>
+      <SideMenu v-if="isDesktopScreen" />
 
       <!-- Mobile nav -->
       <transition name="slide-bottom">
-        <SideMenu v-if="!isMenuCompact && !isDesktopScreen"></SideMenu>
+        <SideMenu v-if="!isMenuCompact && !isDesktopScreen" />
       </transition>
       <transition name="slide-right">
-        <SideMenu v-if="isMenuCompact && !isDesktopScreen" :isCompactMobile="true"></SideMenu>
+        <SideMenu v-if="isMenuCompact && !isDesktopScreen" :isCompactMobile="true" />
       </transition>
-    </div>
+    </header>
     <div class="right-side side">
-      <div class="wrapper">
-        <router-view></router-view>
-      </div>
+      <router-view />
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
   import SideMenu from "./components/SideMenu.vue";
-
   import $ from 'jquery';
   import { useRouter } from "vue-router";
   import { ref } from "vue";
+  import { isDesktopScreen } from "@/components/helpers/helpers.ts"
 
   let isMenuCompact = ref(false);
   const router = useRouter();
 
   router.afterEach((to) => { 
-    switch (to.path) {
-      case '/':
-        isMenuCompact.value = false;
-        break;
-      case '/my-works':
-        isMenuCompact.value = true;
-        break;
-      case '/contacts':
-        isMenuCompact.value = true;
-        break;
+    if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
+      isMenuCompact.value = false;
+    }
+    
+    if (to.path.startsWith(router.resolve({ name: 'myWorks' }).href)) {
+      isMenuCompact.value = true;
+    }
+    
+    if (to.path.startsWith(router.resolve({ name: 'contacts' }).href)) {
+      isMenuCompact.value = true;
     }
   });
 
-  //Rewrite this in helper!!!
-  const isDesktopScreen = ref(checkIsDesktopScreen());
-
-  window.addEventListener('resize', () => { 
-    isDesktopScreen.value = checkIsDesktopScreen() 
-  });
-
-  function checkIsDesktopScreen() {
-    return window.innerWidth > 1023 
-  }
+  
 
 
 </script>

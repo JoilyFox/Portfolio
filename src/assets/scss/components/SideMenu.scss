@@ -12,8 +12,12 @@
         opacity: .3;
         padding: 7px;
         text-decoration: none;
-        transition: opacity .1s, font-weight .1s;
         transition-timing-function: ease-in-out;
+        white-space: nowrap;
+        transition: 
+            opacity .1s, 
+            font-weight .1s,
+            font-size .2s;
 
         &:hover { opacity: .5; }
         &:active { opacity: .25; }
@@ -21,9 +25,11 @@
         &.logo {
             padding-left: 20px;
             opacity: 1 !important;
+            transition: padding .2s;
 
             img {
                 width: 55px;
+                transition: width .2s;
             }
 
             &:active { opacity: .5 !important; }
@@ -36,6 +42,22 @@
         }
     }
 }
+
+// .compact-nav {
+//     .main-nav {
+//         &-item {
+//             font-size: 19px;
+
+//             &.logo {
+//                 padding-left: 15px;
+
+//                 img {
+//                     width: 57px;
+//                 }
+//             }
+//         }
+//     }
+// }
 
 
 // --- Medias --- //

@@ -1,4 +1,101 @@
-.my-works-section {
+.my-works {
+    padding-bottom: 500px;
+    
+    .section-name {
+        &-container {    
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        &-caption {
+            margin: 0;
+            margin-bottom: 2px;
+            letter-spacing: 0.2em;
+            font-weight: 700;
+            font-size: 27px;
+            text-transform: uppercase;
+            color: $caption-dark-font;
+            font-family: $primary-font;
+        }
+
+        &-description {
+            display: flex;
+            justify-content: center;
+            color: $paragraph-dark-font;
+            font-family: $paragraph-font;
+            font-weight: normal;
+            font-size: 16px;
+            letter-spacing: 0.02em;
+        }
+    }
+
+    &-nav {
+        justify-content: space-between;
+        width: 200px;
+        display: flex;
+        flex-direction: row;
+        margin-top: 25px;
+        margin-bottom: 13px;
+        position: relative;
+    }
+    
+    &-nav-item {
+        color: $paragraph-dark-font;
+        text-decoration: none;
+        font-weight: 400;
+        font-size: 16px;
+        transition: 0.1s ease;
+        padding: 7px;
+        position: relative;
+        font-family: $paragraph-font;
+
+        &:first-child {
+            left: 0;
+        }
+        &:last-child {
+            right: 0;
+        }
+
+        &.router-link-active,
+        &.router-link-exact-active {
+            color: $caption-dark-font;
+            font-weight: 600;
+        }
+    }
+
+
+    .web-apps-gallery {
+        &-container {
+            max-width: 1000px;
+        }
+
+        &-item {
+            $gallery-item-width: 450px;
+
+            width: $gallery-item-width;
+            height: aspect-ratio($gallery-item-width, 16, 9);
+            margin: 10px;
+
+            .gallery-item {
+                &-img {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            .gallery-item {
+                &-caption {
+                    letter-spacing: 0.2em;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
 
 }
 

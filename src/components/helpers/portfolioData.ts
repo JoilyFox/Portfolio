@@ -1,14 +1,37 @@
+// Data
+
 const websiteProjectsData = [
     {
-        id:          1,
-        title:       'Web Store',
+        id: 1,
+        title: 'Web Store',
         description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
-        tags:        ['store'],
-        path:        '/web-store',
+        tags: ['store'],
+        slug: 'web-store', 
+    },
+    {
+        id: 2,
+        title: 'Web Store',
+        description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
+        tags: ['store'],
+        slug: 'web-store', 
+    },
+    {
+        id: 3,
+        title: 'Web Store',
+        description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
+        tags: ['store'],
+        slug: 'web-store', 
     },
 ];
 
 const tags = {
-    'store': 'Store',
+    'store': 'store',
 
 };
+
+// Export
+
+export { 
+    websiteProjectsData, 
+    tags,
+}
