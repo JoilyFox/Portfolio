@@ -23,6 +23,27 @@ section {
 }
 
 
+// lazy load styles
+
+img[lazy=loading] {
+    opacity: 0;
+    transform: scale(1.1);
+}
+
+img[lazy=error] {
+
+/* TO DO */
+
+}
+
+img[lazy=loaded] {
+    transition: .3s;
+    opacity: 1;
+    transform: scale(1);
+}
+
+
+
 // Animations 
 
 // appearing text underline when hovering text
@@ -97,6 +118,7 @@ section {
         transition: .2s ease;
         overflow: hidden;
         position: relative;
+        background-color: rgb(218, 218, 218);
 
         &::before {
             content: "";
@@ -136,7 +158,7 @@ section {
 
         .gallery-item {
             &-img {
-                transition: .6s ease-out;
+                transition: .3s ease-out;
             }
 
             &-caption {
@@ -209,6 +231,23 @@ section {
         opacity: 0;
         transition: $transition;
         transform: translateX(-30px);
+    }
+    &-leave-to {
+        transform: translateX(30px);
+    }
+}
+
+.view-slide-left {
+    $transition: all .2s ease-out;
+
+    &-enter-to, &-leave-from {
+        transition: $transition;
+        opacity: 1;
+    }
+    &-enter-from, &-leave-to {
+        opacity: 0;
+        transition: $transition;
+        transform: translateX(30px);
     }
     &-leave-to {
         transform: translateX(30px);

@@ -13,7 +13,11 @@
       </transition>
     </header>
     <div class="right-side side">
-      <router-view />
+      <router-view v-slot="{ Component }">
+        <transition name="view-slide-left" mode="out-in" appear>
+          <component :is="Component"></component>
+        </transition>
+      </router-view>
     </div>
   </main>
 </template>

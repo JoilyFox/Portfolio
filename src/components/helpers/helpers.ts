@@ -4,7 +4,7 @@ import { ref } from "vue";
 
 // Helpers
 
-
+// Check screen size and updates it on resize
 const isDesktopScreen = ref(checkIsDesktopScreen());
 
 function checkIsDesktopScreen() {
@@ -14,6 +14,25 @@ function checkIsDesktopScreen() {
 window.addEventListener('resize', () => { 
     isDesktopScreen.value = checkIsDesktopScreen() 
 });
+
+
+// Render delay functionality
+// let renderDelayShown = ref(false);
+
+// setTimeout(() => {
+//     renderDelayShown.value = true;
+// }, 500);
+
+// function renderDelayShown(timeout: number) {
+//     let renderDelayShown = false;
+
+//     setTimeout(() => {
+//         renderDelayShown = true;
+//     }, timeout);
+
+//     return renderDelayShown;
+// }
+
 
 
 // Export

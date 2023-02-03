@@ -13,14 +13,14 @@ const websiteProjectsData = [
         title: 'Web Store',
         description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
         tags: ['store'],
-        slug: 'web-store', 
+        slug: 'web-store1', 
     },
     {
         id: 3,
         title: 'Web Store',
         description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
         tags: ['store'],
-        slug: 'web-store', 
+        slug: 'web-store2', 
     },
 ];
 
