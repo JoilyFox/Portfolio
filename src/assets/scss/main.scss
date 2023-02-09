@@ -3,9 +3,11 @@
 @import 'helpers/constants';
 @import 'helpers/fonts';
 @import 'helpers/helpers';
+@import '../../../node_modules/@fancyapps/ui/dist/fancybox.css';
 
 /* Main */
 @import 'components/general';
 @import 'components/App';
 @import 'components/SideMenu';
 @import 'components/MyWorks';
+@import 'components/modal';

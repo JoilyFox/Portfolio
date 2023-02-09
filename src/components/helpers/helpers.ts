@@ -16,26 +16,9 @@ window.addEventListener('resize', () => {
 });
 
 
-// Render delay functionality
-// let renderDelayShown = ref(false);
-
-// setTimeout(() => {
-//     renderDelayShown.value = true;
-// }, 500);
-
-// function renderDelayShown(timeout: number) {
-//     let renderDelayShown = false;
-
-//     setTimeout(() => {
-//         renderDelayShown = true;
-//     }, timeout);
-
-//     return renderDelayShown;
-// }
-
-
 
 // Export
 export { 
     isDesktopScreen, 
+    selectLazyParents
 }

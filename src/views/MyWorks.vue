@@ -3,13 +3,7 @@
     <div class="container">
       <MyWorksCaption description="Discover my web development creations." />
       <MyWorksNavigation />
-
-      <!-- <router-view v-slot="{ Component }">
-        <transition name="view-slide-right" mode="out-in">
-          <component :is="Component"></component>
-        </transition>
-      </router-view> -->
-
+      
       <router-view v-slot="{ Component }">
         <transition name="view-slide-right" mode="out-in" appear>
           <component :is="Component"></component>

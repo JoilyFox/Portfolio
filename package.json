@@ -12,6 +12,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@fancyapps/ui": "^4.0.31",
     "@rollup/plugin-inject": "^5.0.3",
     "denque": "^2.1.0",
     "events": "^3.3.0",

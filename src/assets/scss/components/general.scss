@@ -130,6 +130,7 @@ img[lazy=loaded] {
             z-index: 1;
             opacity: 0;
             transition: .3s ease;
+            pointer-events: none;
         }
 
         &-picture-text {
@@ -157,6 +158,11 @@ img[lazy=loaded] {
         }
 
         .gallery-item {
+            &-image-link {
+                height: 100%;
+                display: flex;  
+            }
+
             &-img {
                 transition: .3s ease-out;
             }

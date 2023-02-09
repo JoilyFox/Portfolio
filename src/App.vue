@@ -23,30 +23,27 @@
 </template>
 
 <script setup lang="ts">
-  import SideMenu from "./components/SideMenu.vue";
-  import $ from 'jquery';
-  import { useRouter } from "vue-router";
-  import { ref } from "vue";
-  import { isDesktopScreen } from "@/components/helpers/helpers.ts"
+import SideMenu from "./components/SideMenu.vue";
+import $ from 'jquery';
+import { useRouter } from "vue-router";
+import { ref, } from "vue";
+import { isDesktopScreen } from "@/components/helpers/helpers.ts";
 
-  let isMenuCompact = ref(false);
-  const router = useRouter();
+let isMenuCompact = ref(false);
+const router = useRouter();
 
-  router.afterEach((to) => { 
-    if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
-      isMenuCompact.value = false;
-    }
-    
-    if (to.path.startsWith(router.resolve({ name: 'myWorks' }).href)) {
-      isMenuCompact.value = true;
-    }
-    
-    if (to.path.startsWith(router.resolve({ name: 'contacts' }).href)) {
-      isMenuCompact.value = true;
-    }
-  });
-
+router.afterEach((to) => { 
+  if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
+    isMenuCompact.value = false;
+  }
   
-
+  if (to.path.startsWith(router.resolve({ name: 'myWorks' }).href)) {
+    isMenuCompact.value = true;
+  }
+  
+  if (to.path.startsWith(router.resolve({ name: 'contacts' }).href)) {
+    isMenuCompact.value = true;
+  }
+});
 
 </script>
