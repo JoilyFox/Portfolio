@@ -1,0 +1,89 @@
+$modal-transition: .4s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+
+body {
+  transform: scale(1);
+  transition: $modal-transition;
+  
+
+  &.modal-active {
+    transform: scale(1.06);
+  }
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  z-index: 1000;
+  
+  &-background {
+    display: flex;
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background: black;
+    opacity: 0;
+    top: 0;
+    left: 0;
+
+    // animation
+    z-index: 0;
+    cursor: pointer;
+    transition: $modal-transition;
+  }
+
+  &-centerer {
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-body {
+    z-index: 1;
+    display: flex;
+    background-color: $primary-white;
+    padding: 25px;
+    max-height: 80vh;
+    overflow-y: auto;
+
+    // animation
+    transform: scale(1.3);
+    transition: $modal-transition;
+    opacity: 0;
+  }
+
+  &-wrapper {
+    width: 100%;
+  }
+
+  &.active {
+    transform: scale(1);
+    
+    .modal-body {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .modal-background {
+      opacity: .8;
+    }
+
+    &.out {
+      .modal-body {
+        transform: scale(1.3);
+        opacity: 0;
+      }
+      .modal-background {
+        opacity: 0;
+      }
+    }
+  }
+}

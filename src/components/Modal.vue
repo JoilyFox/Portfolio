@@ -1,12 +1,14 @@
 <template>
-    <div class="modal-container" :id="props.modalId">
-        <div class="modal-background">
-            <div class="modal">
-                <!-- <slot name="modal-content"></slot> -->
+    <div class="modal" :id="props.modalId">
+        <div class="modal-centerer">
+            <div class="modal-body" :style="`width: ${props.modalWidth}`">
+                <div class="modal-wrapper">
+                    <slot/>
+                </div>
             </div>
         </div>
+        <div class="modal-background close-modal"></div>
     </div>
-
 </template>
 
 <script setup lang="ts">
@@ -18,44 +20,33 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    modalWidth: {
+        type: String,
+        default: '400px',
+    }
 });
 
 onMounted(() => {
     const modal = $('#' + props.modalId);
     const openModalBtn = $(`[open-modal="${props.modalId}"]`);
-    const modalBackground = $('.modal-background');
-    
+    const body = $('body');
 
     openModalBtn.click(() => {
-        console.log(modal)
-
-        modal.addClass('two');
-        $('body').addClass('modal-active');
+        modal.addClass('active');
+        body.addClass('modal-active');
     });
 
-    modalBackground.click(function(){
+    $('.close-modal').click(function(){
         modal.addClass('out');
 
         setTimeout(() => {
             modal.removeClass('out');
-            modal.removeClass('two');
+            modal.removeClass('active');
         }, 300);
-        $('body').removeClass('modal-active');
+
+        body.removeClass('modal-active');
     });
 })
-
-
-
-// $('.modalOpen').click(function(){
-//   var buttonId = $(this).attr('id');
-//   $(modalId).removeAttr('class').addClass('two');
-//   $('body').addClass('modal-active');
-// })
-
-// $(modalId).click(function(){
-//   $(this).addClass('out');
-//   $('body').removeClass('modal-active');
-// });
 
     
 </script>

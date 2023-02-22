@@ -1,8 +1,15 @@
 <template>
   <div class="web-apps-gallery-container hover-gallery-container">
-    <div class="web-apps-gallery-item hover-gallery-item" v-for="item in websiteProjectsData">
-    
-      <a class="gallery-item-image-link" data-fancybox="web-app-gallery" :href="WEB_APPS_IMAGE_PATH + item.slug + '/' + HEADER_IMAGE_NAME">
+    <div 
+      class="web-apps-gallery-item hover-gallery-item" 
+      v-for="item in websiteProjectsData"
+      @click="modalData = item"
+    >
+
+      <a 
+        class="gallery-item-image-link"
+        open-modal="myWorksWebAppModal"
+      >
         <img 
           class="gallery-item-img lazy-image"
           v-lazy="{ 
@@ -15,7 +22,7 @@
       </a>
 
       <div class="hover-gallery-item-picture-text">
-        <span class="gallery-item-caption hover-underline-thin">
+        <span class="gallery-item-caption hover-underline-thin" open-modal="myWorksWebAppModal"> 
           {{ item.title }}
         </span>
         <p class="gallery-item-description">
@@ -29,45 +36,20 @@
       </div>
     </div>
 
-  <Modal modalId="modalTest"></Modal>
-  <button open-modal="modalTest">fdasgdsfgaedgf</button>
+    <!-- Modal -->
+    <MyWorksWebAppModal :modalData="modalData" />
+
   </div>
 </template>
 
 <script setup lang="ts">
-import { websiteProjectsData, tags } from "@/components/helpers/portfolioData";
-import { IMAGE_PATH, WEB_APPS_IMAGE_PATH, HEADER_IMAGE_NAME } from "@/components/helpers/constants";
+import { websiteProjectsData, tags } from "@/data/portfolioData";
+import { IMAGE_PATH, WEB_APPS_IMAGE_PATH, HEADER_IMAGE_NAME } from "@/config/constants";
 import $ from 'jquery';
 import { Fancybox } from "@fancyapps/ui";
-import Modal from "@/components/Modal.vue";
+import MyWorksWebAppModal from "@/components/MyWorksWebAppModal.vue";
+import { ref } from "@vue/reactivity";
 
-Fancybox.bind('[data-fancybox="web-app-gallery"]', {
-  Toolbar: false,
-  closeButton: "top",
-
-  Image: {
-    zoom: false,
-  },
-
-  on: {
-    initCarousel: (fancybox) => {
-      const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
-
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-    "Carousel.change": (fancybox, carousel, to, from) => {
-      const slide = carousel.slides[to];
-
-      fancybox.$container.style.setProperty(
-        "--bg-image",
-        `url("${slide.$thumb.src}")`
-      );
-    },
-  },
-});
-
+let modalData = ref(null);
 
 </script>

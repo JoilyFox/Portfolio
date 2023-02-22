@@ -1,13 +1,20 @@
-/* Additions */
-@import 'helpers/nullifier';
-@import 'helpers/constants';
-@import 'helpers/fonts';
-@import 'helpers/helpers';
-@import '../../../node_modules/@fancyapps/ui/dist/fancybox.css';
+// Utils
+@import "utils/constants";
+@import "utils/functions";
 
-/* Main */
-@import 'components/general';
-@import 'components/App';
-@import 'components/SideMenu';
-@import 'components/MyWorks';
-@import 'components/modal';
+// Base
+@import "base/general";
+@import "base/nullifier";
+
+// Components
+@import "components/modal";
+@import "components/MyWorksWebAppModal";
+@import "components/SideMenu";
+
+// Fonts
+@import "fonts/fonts";
+
+
+// Views
+@import "views/App";
+@import "views/MyWorks";

@@ -27,7 +27,7 @@ import SideMenu from "./components/SideMenu.vue";
 import $ from 'jquery';
 import { useRouter } from "vue-router";
 import { ref, } from "vue";
-import { isDesktopScreen } from "@/components/helpers/helpers.ts";
+import { isDesktopScreen } from "@/helpers/helpers.ts";
 
 let isMenuCompact = ref(false);
 const router = useRouter();

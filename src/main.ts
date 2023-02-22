@@ -9,14 +9,14 @@ const app = createApp(App);
 
 app.use(router);
 app.use(VueLazyLoad, {
-    loading: '',
-    error: '',
-    lifecycle: {
-      error: (el) => {
-        console.log('error', el)
-      },
-    }
-  })
+  loading: '',
+  error: '',
+  lifecycle: {
+    error: (el) => {
+      console.log('error', el)
+    },
+  }
+})
 
 app.mount("#app");
 

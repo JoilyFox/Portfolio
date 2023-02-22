@@ -28,7 +28,6 @@
 </template>
 
 <script setup lang="ts">
-  import { toRefs } from "vue";
   import { RouterLink } from 'vue-router'
 
   defineProps({
