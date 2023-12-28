@@ -2,20 +2,20 @@
   <main>
     <header :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
       <!-- Desktop nav -->
-      <SideMenu v-if="isDesktopScreen" />
+      <SideMenu v-if="!isScreenSize('lg')" />
 
       <!-- Mobile nav -->
       <transition name="slide-bottom">
-        <SideMenu v-if="!isMenuCompact && !isDesktopScreen" />
+        <SideMenu v-if="!isMenuCompact && isScreenSize('lg')" />
       </transition>
       <transition name="slide-right">
-        <SideMenu v-if="isMenuCompact && !isDesktopScreen" :isCompactMobile="true" />
+        <SideMenu v-if="isMenuCompact && isScreenSize('lg')" :isCompactMobile="true" />
       </transition>
     </header>
     <div class="right-side side">
       <router-view v-slot="{ Component }">
-        <transition name="view-slide-left" mode="out-in" appear>
-          <component :is="Component"></component>
+        <transition :name="!isScreenSize('lg') ? 'view-slide-left' : 'view-slide-left-mobile'" mode="out-in" appear>
+          <component :is="Component" />
         </transition>
       </router-view>
     </div>
@@ -24,25 +24,40 @@
 
 <script setup lang="ts">
 import SideMenu from "./components/SideMenu.vue";
-import $ from 'jquery';
 import { useRouter } from "vue-router";
 import { ref, } from "vue";
-import { isDesktopScreen } from "@/helpers/helpers.ts";
+import {
+  getValueFromObject,
+  isScreenSize,
+} from "@/helpers/helpers";
 
-let isMenuCompact = ref(false);
+const isMenuCompact = ref(false);
 const router = useRouter();
+
+/**
+ * Adjusts the menu state based on the given status.
+ */
+function makeMenu(status: 'toggle' | 'compact' | 'full'): void {
+  const actions: { [key: string]: () => void } = {
+    'toggle': () => isMenuCompact.value = !isMenuCompact.value,
+    'compact': () => isMenuCompact.value = true,
+    'full': () => isMenuCompact.value = false,
+  };
+
+  getValueFromObject([status], actions, () => console.warn(`Invalid status: ${status}`))();
+}
 
 router.afterEach((to) => { 
   if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
-    isMenuCompact.value = false;
+    makeMenu('full');
   }
   
   if (to.path.startsWith(router.resolve({ name: 'myWorks' }).href)) {
-    isMenuCompact.value = true;
+    makeMenu('compact');
   }
   
   if (to.path.startsWith(router.resolve({ name: 'contacts' }).href)) {
-    isMenuCompact.value = true;
+    makeMenu('compact');
   }
 });
 

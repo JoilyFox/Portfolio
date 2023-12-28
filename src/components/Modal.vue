@@ -13,7 +13,6 @@
 
 <script setup lang="ts">
 import { onMounted } from '@vue/runtime-core';
-import $ from 'jquery';
 
 const props = defineProps({
     modalId: {
@@ -27,26 +26,31 @@ const props = defineProps({
 });
 
 onMounted(() => {
-    const modal = $('#' + props.modalId);
-    const openModalBtn = $(`[open-modal="${props.modalId}"]`);
-    const body = $('body');
+    const modal = document.getElementById(props.modalId);
+    const openModalBtns = document.querySelectorAll(`[open-modal="${props.modalId}"]`);
+    const body = document.body;
 
-    openModalBtn.click(() => {
-        modal.addClass('active');
-        body.addClass('modal-active');
+    openModalBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal?.classList.add('active');
+            body.classList.add('modal-active');
+        });
     });
 
-    $('.close-modal').click(function(){
-        modal.addClass('out');
+    const closeModalBtns = document.querySelectorAll('.close-modal');
+    closeModalBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            modal?.classList.add('out');
 
-        setTimeout(() => {
-            modal.removeClass('out');
-            modal.removeClass('active');
-        }, 300);
+            setTimeout(() => {
+                modal?.classList.remove('out');
+                modal?.classList.remove('active');
+            }, 300);
 
-        body.removeClass('modal-active');
+            body.classList.remove('modal-active');
+        });
     });
-})
+});
 
     
 </script>

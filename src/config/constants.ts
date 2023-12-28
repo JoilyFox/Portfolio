@@ -1,15 +1,15 @@
 // Constants
 
-const IMAGE_PATH    = '/src/assets/img/';
+export const IMAGE_PATH = '/src/assets/img/';
 
-const WORKS_IMAGE_PATH    = IMAGE_PATH + 'works/';
-const WEB_APPS_IMAGE_PATH = WORKS_IMAGE_PATH + 'web-apps/';
-const HEADER_IMAGE_NAME   = 'header.jpg';
+const WORKS_IMAGE_PATH = IMAGE_PATH + 'works/';
+export const WEB_APPS_IMAGE_PATH = WORKS_IMAGE_PATH + 'web-apps/';
+export const HEADER_IMAGE_NAME = 'header.jpg';
 
-// Export
-
-export { 
-    IMAGE_PATH,
-    WEB_APPS_IMAGE_PATH,
-    HEADER_IMAGE_NAME,
-}
+export const MEDIA_QUERY_SIZE_MAP = {
+    'sm': 640,
+    'md': 768,
+    'lg': 1024,
+    'xl': 1280,
+    'xxl': 1536,
+};

@@ -48,7 +48,8 @@ main {
 
     .left-side {
         &.compact-nav {
-            flex-basis: 65px;
+            min-height: $sidebar-mobile-height;
+            flex-basis: $sidebar-mobile-height;
             clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
         }
 
@@ -73,24 +74,32 @@ main {
 
 // --- Transitions ---
 
-.slide-right-enter-to, .slide-right-leave-from {
-    transition: all .3s ease;
-    position: absolute;
-    transform: translateX(0px);
-}
-.slide-right-enter-from, .slide-right-leave-to {
-    opacity: 0;
-    position: absolute;
-    transform: translateX(-50px);
+.slide-right {
+    &-enter-to,
+    &-leave-from {
+        transition: all .3s ease;
+        transform: translateX(0px);
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
 }
 
-.slide-bottom-enter-to, .slide-bottom-leave-from {
-    transition: all .3s ease;
-    position: absolute;
-    transform: translateY(0px);
-}
-.slide-bottom-enter-from, .slide-bottom-leave-to {
-    opacity: 0;
-    position: absolute;
-    transform: translateY(50px);
+.slide-bottom {
+    &-enter-to,
+    &-leave-from {
+        transition: all .3s ease;
+        position: absolute;
+        transform: translateY(0px);
+    }
+
+    &-enter-from,
+    &-leave-to {
+        opacity: 0;
+        position: absolute;
+        transform: translateY(50px);
+    }
 }

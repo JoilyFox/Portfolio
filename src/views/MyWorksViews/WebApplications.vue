@@ -45,11 +45,10 @@
 <script setup lang="ts">
 import { websiteProjectsData, tags } from "@/data/portfolioData";
 import { IMAGE_PATH, WEB_APPS_IMAGE_PATH, HEADER_IMAGE_NAME } from "@/config/constants";
-import $ from 'jquery';
 import { Fancybox } from "@fancyapps/ui";
 import MyWorksWebAppModal from "@/components/MyWorksWebAppModal.vue";
 import { ref } from "@vue/reactivity";
 
-let modalData = ref(null);
+const modalData = ref(null);
 
 </script>

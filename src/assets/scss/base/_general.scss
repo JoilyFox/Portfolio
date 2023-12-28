@@ -1,5 +1,19 @@
 * {
     font-family: $primary-font;
+
+    @media screen and (min-width: $md) {
+        &::-webkit-scrollbar {
+            $scrollBarSize: 6px;
+    
+            width: $scrollBarSize;
+            height: $scrollBarSize;
+            position: absolute;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background-color: $primary-black;
+        }
+    }
 }
 
 html, body, #app {
@@ -245,6 +259,29 @@ img[lazy=loaded] {
 
 .view-slide-left {
     $transition: all .2s ease-out;
+
+    &-enter-to, &-leave-from {
+        transition: $transition;
+        opacity: 1;
+    }
+    &-enter-from, &-leave-to {
+        opacity: 0;
+        transition: $transition;
+        transform: translateX(30px);
+    }
+    &-leave-to {
+        transform: translateX(30px);
+    }
+}
+
+.view-slide-left-mobile {
+    $transition: all .2s ease-out;
+
+    &-move,
+    &-enter-active,
+    &-leave-active {
+        position: absolute;
+    }
 
     &-enter-to, &-leave-from {
         transition: $transition;
