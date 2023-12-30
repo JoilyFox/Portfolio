@@ -1,11 +1,6 @@
 <template>
     <nav class="main-nav nav" :class="{'compactMobile': isCompactMobile}">  
-      <router-link
-        class="main-nav-item logo"
-        :to="{ name: 'home' }"
-      >
-        <img src="@/assets/img/icons/main-logo.svg" alt="Logo" />
-      </router-link>
+      <MainLogo class="main-nav-item"/>
       <router-link 
         class="main-nav-item" 
         :to="{ name: 'home' }"
@@ -28,12 +23,13 @@
 </template>
 
 <script setup lang="ts">
-  import { RouterLink } from 'vue-router'
+import { RouterLink } from 'vue-router'
+import MainLogo from '@/components/Common/MainLogo.vue';
 
-  defineProps({
-    isCompactMobile: {
-      type: Boolean,
-      default: false,
-    },
-  })
+defineProps({
+  isCompactMobile: {
+    type: Boolean,
+    default: false,
+  },
+})
 </script>

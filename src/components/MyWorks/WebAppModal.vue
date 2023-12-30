@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import Modal from "@/components/Modal.vue";
+import Modal from "@/components/Common/Modal.vue";
 
 const props = defineProps({
     modalData: {

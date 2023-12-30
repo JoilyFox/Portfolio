@@ -7,7 +7,6 @@
     
             width: $scrollBarSize;
             height: $scrollBarSize;
-            position: absolute;
         }
     
         &::-webkit-scrollbar-thumb {
@@ -238,6 +237,18 @@ img[lazy=loaded] {
     
 }
 
+.main-logo {
+    opacity: 1 !important;
+    transition: padding .2s;
+
+    img {
+        width: 55px;
+        transition: width .2s;
+    }
+
+    &:active { opacity: .5 !important; }
+}
+
 // Vue animations
 
 .view-slide-right {
@@ -271,6 +282,23 @@ img[lazy=loaded] {
     }
     &-leave-to {
         transform: translateX(30px);
+    }
+}
+
+.view-slide-down {
+    $transition: all .2s ease-out;
+
+    &-enter-to, &-leave-from {
+        transition: $transition;
+        opacity: 1;
+    }
+    &-enter-from, &-leave-to {
+        opacity: 0;
+        transition: $transition;
+        transform: translateY(-15px);
+    }
+    &-leave-to {
+        transform: translateY(15px);
     }
 }
 

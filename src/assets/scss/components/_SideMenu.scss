@@ -1,9 +1,12 @@
 .main-nav {
     display: flex;
     flex-direction: column;
-    margin-left: 50px;
-    margin-top: 30px;
     transition: .3s;
+
+    &.desktop {
+        margin-left: 50px;
+        margin-top: 30px;
+    }
 
     &-item {
         font-weight: 300;
@@ -22,17 +25,13 @@
         &:hover { opacity: .5; }
         &:active { opacity: .25; }
 
-        &.logo {
+        &.main-logo {
             padding-left: 20px;
-            opacity: 1 !important;
-            transition: padding .2s;
 
             img {
                 width: 55px;
                 transition: width .2s;
             }
-
-            &:active { opacity: .5 !important; }
         }
 
         &.router-link-active,
@@ -99,16 +98,6 @@
             }
         }
     }
-
-    .main-nav {
-        margin-top: 20px;
-
-        &-item {
-            &.logo img {
-                width: 40px;
-            }
-        }
-    }
 }
 
 // Smartfone
@@ -118,8 +107,5 @@
 }
 
 @media screen and (max-width: 400px) {
-    .main-nav {
-        align-items: center;
-        margin-left: 0;
-    }
+
 }

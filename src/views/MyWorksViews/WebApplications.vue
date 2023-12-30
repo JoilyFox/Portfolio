@@ -37,7 +37,7 @@
     </div>
 
     <!-- Modal -->
-    <MyWorksWebAppModal :modalData="modalData" />
+    <WebAppModal :modalData="modalData" />
 
   </div>
 </template>
@@ -46,7 +46,7 @@
 import { websiteProjectsData, tags } from "@/data/portfolioData";
 import { IMAGE_PATH, WEB_APPS_IMAGE_PATH, HEADER_IMAGE_NAME } from "@/config/constants";
 import { Fancybox } from "@fancyapps/ui";
-import MyWorksWebAppModal from "@/components/MyWorksWebAppModal.vue";
+import WebAppModal from "@/components/MyWorks/WebAppModal.vue";
 import { ref } from "@vue/reactivity";
 
 const modalData = ref(null);

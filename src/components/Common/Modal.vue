@@ -3,7 +3,7 @@
         <div class="modal-centerer">
             <div class="modal-body" :style="`width: ${props.modalWidth}`">
                 <div class="modal-wrapper">
-                    <slot/>
+                    <slot />
                 </div>
             </div>
         </div>
