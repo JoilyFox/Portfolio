@@ -1,6 +1,9 @@
 // Imports
 import { ref } from "vue";
-import { MEDIA_QUERY_SIZE_MAP } from "@/config/constants";
+import { 
+    MEDIA_QUERY_SIZE_MAP,
+    EMPTY_VALUE,
+} from "@/config/constants";
 
 
 /**
@@ -181,6 +184,62 @@ function isScreenSize(size = null, operator = '<') {
     }
 }
 
+/**
+ * Returns the input value or default value from config if the value is null or an empty string.
+ *
+ * @param {*} value - The input value to be checked.
+ * @param fallbackValue
+ * @returns {*} - The input value or '...' if the input value is null or an empty string.
+ */
+function getValueOrFallback(value, fallbackValue = EMPTY_VALUE) {
+    return !isValueEmpty(value) ? value : fallbackValue;
+}
+
+/**
+ * Retrieves the value of a nested property within an object.
+ *
+ * @param {Object} obj - The object to traverse.
+ * @param {string} path - The dot-separated path of the nested property.
+ * @param defaultValue
+ * @returns {*} The value of the nested property if all levels exist, or `false` otherwise.
+ *
+ * @example
+ *  getNestedValue(userData, 'user.address.street', 'No street');
+ *  getNestedValue(userData, 'user.nonexistentKey', null);
+ */
+function getNestedValue(obj, path, defaultValue = EMPTY_VALUE) {
+    const keys = path.split('.');
+    let value = obj;
+
+    for (const key of keys) {
+        if (value && value.hasOwnProperty(key)) {
+            value = value[key];
+        } else {
+            return defaultValue;
+        }
+    }
+
+    return value;
+}
+
+/**
+ * Generates a unique ID string.
+ *
+ * This function creates a unique identifier using a random number, which is then
+ * converted to a base-36 (alphanumeric) string and sliced to obtain a substring.
+ * The unique ID can be prefixed with a custom string to make it more identifiable.
+ *
+ * @param {string} [prefix='unique-id'] - Optional prefix for the unique ID.
+ * @returns {string} A unique ID string with an optional prefix.
+ *
+ * @example
+ * // returns a unique ID like 'unique-id-5g8xwvh5z'
+ * const uniqueId = useUniqueId();
+ */
+function generateUUID() {
+    return `${Math.random().toString(36).substr(2, 9)}`;
+}
+
 
 
 // Export
@@ -188,4 +247,7 @@ export {
     isValueEmpty,
     getValueFromObject,
     isScreenSize,
+    getValueOrFallback,
+    getNestedValue,
+    generateUUID
 }
