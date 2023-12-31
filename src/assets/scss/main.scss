@@ -1,3 +1,8 @@
+// Tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Utils
 @import "utils/constants";
 @import "utils/functions";
@@ -13,7 +18,6 @@
 
 // Fonts
 @import "fonts/fonts";
-
 
 // Views
 @import "views/App";

@@ -15,6 +15,14 @@
     }
 }
 
+.paragraph-light-color {
+    color: $paragraph-light-font;
+}
+
+.paragraph-dark-color {
+    color: $paragraph-dark-font;
+}
+
 html, body, #app {
     background-color: $primary-white;
     height: 100vh;
