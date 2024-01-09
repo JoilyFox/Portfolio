@@ -1,0 +1,2 @@
+
+export const MODAL_TRANSITION_DURATION = 400;

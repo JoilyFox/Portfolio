@@ -1,7 +1,9 @@
 <template>
-    <div>
+    <div class="sm:p-6 py-6 px-4">
         <div class="wa-modal-caption-container">
-            <h3 class="wa-modal-caption">{{ modalCaption }}</h3>
+            <h3 class="wa-modal-caption pr-6">
+                {{ modalCaption }}
+            </h3>
         </div>
 
         <div>

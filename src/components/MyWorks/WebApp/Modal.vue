@@ -1,9 +1,16 @@
 <template>
-	<Modal class="wa-modal" modalId="myWorksWebAppModal" modalWidth="800px">
-		<component 
-			:is="getNestedValue(modalData, 'contentComponent', FallbackComponent)"
-			:modalData="modalData"
-		/>
+	<Modal
+		:show="isActive"
+		width="4xl"
+		additionalBodyClasses="wa-modal"
+		:transitionDuration="MODAL_TRANSITION_DURATION"
+	>
+		<div>
+			<component 
+				:is="getNestedValue(modalData, 'contentComponent', FallbackComponent)"
+				:modalData="modalData"
+			/>
+		</div>
 	</Modal>
 </template>
 
@@ -11,8 +18,13 @@
 import Modal from "@/components/Common/Modal.vue";
 import FallbackComponent from "@/components/MyWorks/WebApp/ModalsComponents/FallbackComponent.vue";
 import { getNestedValue } from "@/helpers/helpers";
+import { MODAL_TRANSITION_DURATION } from "@/config/components/webAppModalConstants";
 
 defineProps({
+	isActive: {
+        type: Boolean,
+        default: false,
+	},
     modalData: {
         type: Object,
         default: {},

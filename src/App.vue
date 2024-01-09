@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main ref="allContentRef">
     <header :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
       <!-- Desktop nav -->
       <SideMenu
@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import SideMenu from "./components/App/SideMenu.vue";
 import { useRouter } from "vue-router";
-import { ref, } from "vue";
+import { ref, provide, onMounted } from "vue";
 import {
   getValueFromObject,
   isScreenSize,
@@ -50,10 +50,22 @@ import {
 import Icon from "@/components/Common/Icon.vue";
 import MobileMenu from "@/components/App/MobileMenu.vue";
 import MainLogo from '@/components/Common/MainLogo.vue';
+import { PROVIDE_PROPS_NAMES } from "@/config/constants";
 
 const isMenuCompact = ref(false);
 const isMobileMenuActive = ref(false);
 const router = useRouter();
+
+// Providing layout DOM element to children components
+const bodyDOMRef = ref();
+const allContentRef = ref(null);
+
+provide(PROVIDE_PROPS_NAMES.bodyDOM, bodyDOMRef);
+provide(PROVIDE_PROPS_NAMES.allContentRef, allContentRef);
+
+onMounted(() => {
+  bodyDOMRef.value = document.body;
+})
 
 /**
  * Adjusts the menu state based on the given status.
@@ -81,6 +93,9 @@ function doMobileMenu(status: 'toggle' | 'show' | 'hide'): void {
   getValueFromObject([status], actions, () => console.warn(`Invalid status: ${status}`))();
 }
 
+/**
+ * Control the sidebar, depending on which page is active
+ */
 router.afterEach((to) => { 
   if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
     makeMenu('full');

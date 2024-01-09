@@ -198,6 +198,7 @@ img[lazy=loaded] {
                 font-size: 13px;
                 color: $paragraph-light-font;
                 cursor: default;
+                line-height: 14px;
             }
             &-tags {
                 font-family: $paragraph-font;
@@ -227,7 +228,7 @@ img[lazy=loaded] {
         }
     }
 
-    //TODO
+    // TODO
     
     // &-item {
     //     &:active {
@@ -255,6 +256,11 @@ img[lazy=loaded] {
     }
 
     &:active { opacity: .5 !important; }
+}
+
+.font-inherit {
+    font-size: inherit;
+    line-height: inherit;
 }
 
 // Vue animations
