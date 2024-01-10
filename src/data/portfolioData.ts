@@ -3,7 +3,7 @@ import { generateUUID } from "@/helpers/helpers";
 import { WEB_APPS_IMAGE_PATH, MAIN_IMAGE_NAME } from "@/config/constants";
 
 // Data
-const webAppsData = [
+const WEB_APP_DATA = [
     {
         id: generateUUID(),
         title: 'Log My Hours',
@@ -37,9 +37,44 @@ const tags = {
 
 };
 
+const SKILLS = {
+    'laravel': {
+        name: 'Laravel',
+    },
+    'vue': {
+        name: 'Vue',
+    },
+    'inertia': {
+        name: 'Inertia',
+    },
+    'laravel_nova': {
+        name: 'Laravel Nova',
+    },
+    'tailwind': {
+        name: 'Tailwind CSS',
+    },
+    'docker': {
+        name: 'Docker',
+    },
+    'scss': {
+        name: 'SCSS',
+    },
+    'gitlab': {
+        name: 'GitLab ',
+    },
+    'linux': {
+        name: 'Linux',
+    },
+    'devops': {
+        name: 'DevOps',
+    },
+
+};
+
 // Export
 
 export { 
-    webAppsData, 
+    WEB_APP_DATA, 
     tags,
+    SKILLS,
 }

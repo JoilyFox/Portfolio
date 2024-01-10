@@ -44,12 +44,7 @@ main {
     display: flex;
     background-color: $primary-white;
     max-height: 80vh;
-    // max-width: calc(95vw - 100px);
     overflow-y: auto;
-
-    // animation
-    // transform: scale(1.3);
-    // transition: $modal-transition;
   }
 
   &-wrapper {

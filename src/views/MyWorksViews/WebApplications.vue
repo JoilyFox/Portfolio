@@ -2,7 +2,7 @@
 	<div class="web-apps-gallery-container hover-gallery-container">
 		<div 
 			class="web-apps-gallery-item hover-gallery-item" 
-			v-for="item in webAppsData"
+			v-for="item in WEB_APP_DATA"
 			@click="modalData = item"
 		>
 
@@ -51,7 +51,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { webAppsData, tags } from "@/data/portfolioData";
+import { WEB_APP_DATA, tags } from "@/data/portfolioData";
 import { IMAGE_PATH, NO_IMAGE_PATH } from "@/config/constants";
 import { Fancybox } from "@fancyapps/ui";
 import WebAppModal from "@/components/MyWorks/WebApp/Modal.vue";
@@ -77,7 +77,7 @@ function closeWork() {
 
 watch(() => route.params?.slug, (newSlug) => {
     if (newSlug) {
-        const work = webAppsData.find(item => item.slug === newSlug);
+        const work = WEB_APP_DATA.find(item => item.slug === newSlug);
         if (work) {
             modalData.value = work;
             doModal('show');

@@ -10,14 +10,16 @@
     &-caption-container {
         display: flex;
         width: 100%;
+        padding-top: 4px;
         padding-bottom: 10px;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         border-bottom: solid 1px $paragraph-dark-underline;
     }
 
     &-caption {
         font-weight: 700;
         font-size: 28px;
+        line-height: 30px;
         letter-spacing: 0.25em;
         text-transform: uppercase;
         color: $caption-dark-font;
@@ -26,5 +28,20 @@
     &-description {
         white-space: pre-wrap;
         font-family: $paragraph-font;
+    }
+}
+
+.web-apps-modal-scrollbar {
+    @media screen and (min-width: $md) {
+        &::-webkit-scrollbar {
+            $scrollBarSize: 2px;
+    
+            width: $scrollBarSize;
+            height: $scrollBarSize;
+        }
+    
+        &::-webkit-scrollbar-thumb {
+            background-color: #b6b6b6;
+        }
     }
 }

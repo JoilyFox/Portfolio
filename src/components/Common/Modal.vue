@@ -39,7 +39,10 @@
                         </button>
 
                         <!-- Content -->
-                        <div class="max-h-full overflow-auto">
+                        <div 
+                            class="max-h-full overflow-x-hidden flex"
+                            :class="[scrollabe ? 'overflow-y-auto' : 'overflow-y-hidden']"
+                        >
                             <slot v-if="show"/>
                         </div>
                     </div>
@@ -86,8 +89,12 @@ const props = defineProps({
     },
     closeBtnClasses: {
         type: String,
-        default: 'absolute sm:right-[22px] right-[12px] top-[21px] flex text-3xl p-2',
-    }
+        default: 'absolute sm:right-[22px] right-[12px] top-[18px] flex text-3xl p-2 opacity-60',
+    },
+    scrollabe: {
+        type: Boolean,
+        default: true,
+    },
 });
 
 const emit = defineEmits(['close']);
@@ -135,6 +142,10 @@ const closeOnEscape = (e) => {
 
 onMounted(() => {
     document.addEventListener('keydown', closeOnEscape);
+
+    if (props.show) {
+        makeAppBody('disabled');
+    }
 });
 
 onUnmounted(() => {

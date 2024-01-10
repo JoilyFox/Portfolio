@@ -4,8 +4,9 @@
 		width="4xl"
 		additionalBodyClasses="wa-modal"
 		:transitionDuration="MODAL_TRANSITION_DURATION"
+		:scrollabe="false"
 	>
-		<div>
+		<div class="flex">
 			<component 
 				:is="getNestedValue(modalData, 'contentComponent', FallbackComponent)"
 				:modalData="modalData"
@@ -30,5 +31,4 @@ defineProps({
         default: {},
     },
 });
-
 </script>
