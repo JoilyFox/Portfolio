@@ -8,8 +8,8 @@ import inject from "@rollup/plugin-inject";
 export default defineConfig({
   plugins: [
     inject({
-      $: "jquery",
-      jQuery: "jquery",
+      include: '**/*.js',  // Adjust this to target specific files
+      exclude: 'node_modules/**'
     }),
     vue(),
   ],

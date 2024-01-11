@@ -1,5 +1,5 @@
 <template>
-    <ModalLayout :modalCaption="getNestedValue(modalData, 'title', null)">
+    <ModalLayout :modalCaption="getNestedValue(modalData, 'title', 'Undefined')">
         <Info 
             developmentDuration="Mar 2023 - Dec 2023 · 10 mos"
             :companyName="{ name: 'wwwest.solutions', link: 'https://wwwest.solutions/' }"

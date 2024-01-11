@@ -47,26 +47,26 @@ function isValueEmpty(value: any): boolean {
  * getValueFromObject('name', { name: 'Alice', age: 30 }, 'Unknown');
  * // returns 'Alice'
  */
-function getValueFromObject<T>(
-    key: string | string[],
-    objectMap: { [key: string]: any },
+function getValueFromObject<T, K extends keyof any>(
+    key: K | K[],
+    objectMap: Record<K, any>,
     fallbackValue: T | (() => T) = null as any
-): T | any {
+): T {
     let value: any = fallbackValue;
-  
+
     if (!isValueEmpty(key) && Array.isArray(key)) {
-		value = objectMap;
-	
-		for (const k of key) {
-			if (value && Object.prototype.hasOwnProperty.call(value, k)) {
-				value = value[k];
-			} else {
-				// Check if fallbackValue is a function and call it if it is.
-				return typeof fallbackValue === 'function' ? fallbackValue() : fallbackValue;
-			}
-		}
+        value = objectMap;
+
+        for (const k of key) {
+            if (value && Object.prototype.hasOwnProperty.call(value, k)) {
+                value = value[k];
+            } else {
+                // Check if fallbackValue is a function and call it if it is.
+                return typeof fallbackValue === 'function' ? (fallbackValue as () => T)() : fallbackValue;
+            }
+        }
     }
-  
+
     return value;
 }
 
@@ -89,10 +89,11 @@ function getValueFromObject<T>(
  * const result2 = isScreenSize(['sm', 'lg']);
  * console.log(result2); // Output: true (if the viewport width is between 640 and 1024 pixels)
  */
+type ScreenSize = keyof typeof MEDIA_QUERY_SIZE_MAP;
+type Operator = '<' | '>' | '<=' | '>=' | '=';
+function isScreenSize(size: ScreenSize | ScreenSize[], operator: Operator = '<'): boolean {
 
-function isScreenSize(size = null, operator = '<') {
-
-    function validateSizeArray(size) {
+    function validateSizeArray(size: ScreenSize[]): false | [number, number] {
         const values = size.map((s) => {
             const val = MEDIA_QUERY_SIZE_MAP[s];
             if (typeof val !== 'number') {
@@ -112,10 +113,10 @@ function isScreenSize(size = null, operator = '<') {
             return false;
         }
 
-        return values;
+        return values as [number, number];
     }
 
-    function getSizeValue(size) {
+    function getSizeValue(size: ScreenSize): number | false {
         const sizeValue = MEDIA_QUERY_SIZE_MAP[size];
 
         if (isValueEmpty(sizeValue)) {
@@ -126,14 +127,13 @@ function isScreenSize(size = null, operator = '<') {
         return sizeValue;
     }
 
-    function generateMediaQuery(operator, sizeValue) {
-
-        const mediaQueries = {
-            '<': (sizeValue) => `(max-width: ${sizeValue - 1}px)`,
-            '>': (sizeValue) => `(min-width: ${sizeValue}px)`,
-            '<=': (sizeValue) => `(max-width: ${sizeValue}px)`,
-            '>=': (sizeValue) => `(min-width: ${sizeValue}px)`,
-            '=': (sizeValue) => `(width: ${sizeValue}px)`,
+    function generateMediaQuery(operator: Operator, sizeValue: number): string | false {
+        const mediaQueries: { [key in Operator]: (sizeValue: number) => string } = {
+            '<': (sizeValue: number) => `(max-width: ${sizeValue - 1}px)`,
+            '>': (sizeValue: number) => `(min-width: ${sizeValue}px)`,
+            '<=': (sizeValue: number) => `(max-width: ${sizeValue}px)`,
+            '>=': (sizeValue: number) => `(min-width: ${sizeValue}px)`,
+            '=': (sizeValue: number) => `(width: ${sizeValue}px)`,
         };
 
         const getMediaQuery = mediaQueries[operator];
@@ -146,7 +146,7 @@ function isScreenSize(size = null, operator = '<') {
         return getMediaQuery(sizeValue);
     }
 
-    function matchesMediaQuery(mediaQuery) {
+    function matchesMediaQuery(mediaQuery: string): boolean {
         if (typeof window !== 'undefined' && window.matchMedia) {
             return window.matchMedia(mediaQuery).matches;
         }
@@ -159,11 +159,14 @@ function isScreenSize(size = null, operator = '<') {
     }
 
     if (Array.isArray(size)) {
-        const [minValue, maxValue] = validateSizeArray(size);
+        const validationResult = validateSizeArray(size);
 
-        if (!minValue || !maxValue) {
+        // Check if validationResult is a tuple before destructuring
+        if (!validationResult) {
             return false;
         }
+
+        const [minValue, maxValue] = validationResult;
 
         const mediaQuery = `(min-width: ${minValue}px) and (max-width: ${maxValue}px)`;
         return matchesMediaQuery(mediaQuery);
@@ -191,8 +194,11 @@ function isScreenSize(size = null, operator = '<') {
  * @param fallbackValue
  * @returns {*} - The input value or '...' if the input value is null or an empty string.
  */
-function getValueOrFallback(value, fallbackValue = EMPTY_VALUE) {
-    return !isValueEmpty(value) ? value : fallbackValue;
+function getValueOrFallback<T>(value: T | null | undefined, fallbackValue: T = EMPTY_VALUE as unknown as T): T {
+    if (value === null || value === undefined || isValueEmpty(value)) {
+        return fallbackValue;
+    }
+    return value;
 }
 
 /**
@@ -207,19 +213,19 @@ function getValueOrFallback(value, fallbackValue = EMPTY_VALUE) {
  *  getNestedValue(userData, 'user.address.street', 'No street');
  *  getNestedValue(userData, 'user.nonexistentKey', null);
  */
-function getNestedValue(obj, path, defaultValue = EMPTY_VALUE) {
+function getNestedValue<T>(obj: any, path: string, defaultValue: T = EMPTY_VALUE as unknown as T): T {
     const keys = path.split('.');
-    let value = obj;
+    let value: any = obj;
 
     for (const key of keys) {
-        if (value && value.hasOwnProperty(key)) {
+        if (value && Object.prototype.hasOwnProperty.call(value, key)) {
             value = value[key];
         } else {
             return defaultValue;
         }
     }
 
-    return value;
+    return value as T;
 }
 
 /**

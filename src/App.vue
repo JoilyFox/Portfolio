@@ -1,42 +1,42 @@
 <template>
-  <main ref="allContentRef">
-    <header :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
-      <!-- Desktop nav -->
-      <SideMenu
-        class="desktop"
-        v-if="isScreenSize('lg', '>=')" 
-      />
-      
-      <!-- Mobile nav --> 
-      <div v-else class="mobile-header">
-        <button 
-          class="burger-menu"
-          @click="doMobileMenu('show')"
-        >
-          <Icon icon="menu" class="burger-menu-icon"/>
-        </button>
+	<main ref="allContentRef">
+		<header :class="['left-side', 'side', isMenuCompact ? 'compact-nav' : 'full-nav']">
+			<!-- Desktop nav -->
+			<SideMenu
+				class="desktop"
+				v-if="isScreenSize('lg', '>=')" 
+			/>
+			
+			<!-- Mobile nav --> 
+			<div v-else class="mobile-header">
+				<button 
+					class="burger-menu"
+					@click="doMobileMenu('show')"
+				>
+					<Icon icon="menu" class="burger-menu-icon"/>
+				</button>
 
-        <MainLogo class=""/>
-      </div>
-    </header>
-    <div class="right-side side">
-      <router-view v-slot="{ Component }">
-        <transition 
-          :name="isScreenSize('lg', '>=') ? 'view-slide-left' : 'view-slide-down'" 
-          mode="out-in" 
-          appear
-        >
-          <component :is="Component" />
-        </transition>
-      </router-view>
-    </div>
+				<MainLogo class=""/>
+			</div>
+		</header>
+		<div class="right-side side">
+			<router-view v-slot="{ Component }">
+				<transition 
+					:name="isScreenSize('lg', '>=') ? 'view-slide-left' : 'view-slide-down'" 
+					mode="out-in" 
+					appear
+				>
+					<component :is="Component" />
+				</transition>
+			</router-view>
+		</div>
 
-    <!-- Mobile menu -->
-    <MobileMenu 
-      :isActive="isMobileMenuActive"
-      @closeMenu="doMobileMenu('hide')"
-    />
-  </main>
+		<!-- Mobile menu -->
+		<MobileMenu 
+			:isActive="isMobileMenuActive"
+			@closeMenu="doMobileMenu('hide')"
+		/>
+	</main>
 </template>
 
 <script setup lang="ts">
@@ -64,50 +64,56 @@ provide(PROVIDE_PROPS_NAMES.bodyDOM, bodyDOMRef);
 provide(PROVIDE_PROPS_NAMES.allContentRef, allContentRef);
 
 onMounted(() => {
-  bodyDOMRef.value = document.body;
+  	bodyDOMRef.value = document.body;
 })
 
 /**
  * Adjusts the menu state based on the given status.
  */
-function makeMenu(status: 'toggle' | 'compact' | 'full'): void {
-  const actions: { [key: string]: () => void } = {
-    'toggle': () => isMenuCompact.value = !isMenuCompact.value,
-    'compact': () => isMenuCompact.value = true,
-    'full': () => isMenuCompact.value = false,
-  };
+ function makeMenu(status: 'toggle' | 'compact' | 'full'): void {
+    const actions: Record<'toggle' | 'compact' | 'full', () => void> = {
+        'toggle': () => { isMenuCompact.value = !isMenuCompact.value; },
+        'compact': () => { isMenuCompact.value = true; },
+        'full': () => { isMenuCompact.value = false; },
+    };
 
-  getValueFromObject([status], actions, () => console.warn(`Invalid status: ${status}`))();
+    const actionFunction = getValueFromObject([status], actions, () => () => console.warn(`Invalid status: ${status}`));
+    if (actionFunction) {
+        actionFunction();
+    }
 }
 
 /**
  * Show, hide or toggle mobile menu.
  */
-function doMobileMenu(status: 'toggle' | 'show' | 'hide'): void {
-  const actions: { [key: string]: () => void } = {
-    'toggle': () => isMobileMenuActive.value = !isMobileMenuActive.value,
-    'show': () => isMobileMenuActive.value = true,
-    'hide': () => isMobileMenuActive.value = false,
-  };
+ function doMobileMenu(status: 'toggle' | 'show' | 'hide'): void {
+    const actions: Record<'toggle' | 'show' | 'hide', () => void> = {
+        'toggle': () => { isMobileMenuActive.value = !isMobileMenuActive.value; },
+        'show': () => { isMobileMenuActive.value = true; },
+        'hide': () => { isMobileMenuActive.value = false; },
+    };
 
-  getValueFromObject([status], actions, () => console.warn(`Invalid status: ${status}`))();
+    const actionFunction = getValueFromObject([status], actions, () => () => console.warn(`Invalid status: ${status}`));
+    if (actionFunction) {
+        actionFunction();
+    }
 }
 
 /**
  * Control the sidebar, depending on which page is active
  */
 router.afterEach((to) => { 
-  if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
-    makeMenu('full');
-  }
-  
-  if (to.path.startsWith(router.resolve({ name: 'myWorks' }).href)) {
-    makeMenu('compact');
-  }
-  
-  if (to.path.startsWith(router.resolve({ name: 'contacts' }).href)) {
-    makeMenu('compact');
-  }
+	if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
+		makeMenu('full');
+	}
+	
+	if (to.path.startsWith(router.resolve({ name: 'myWorks' }).href)) {
+		makeMenu('compact');
+	}
+	
+	if (to.path.startsWith(router.resolve({ name: 'contacts' }).href)) {
+		makeMenu('compact');
+	}
 });
 
 </script>

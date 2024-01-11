@@ -66,7 +66,7 @@ const modalData = shallowRef({});
 // Modal state ref
 const isModalActive = ref(false);
 
-function openWork(work) {
+function openWork(work: { slug: string }) {
     router.push({ name: 'webApplications', params: { slug: work.slug } });
     doModal('show');
 }
@@ -93,13 +93,13 @@ watch(() => route.params?.slug, (newSlug) => {
  * Change modal state
  */
 function doModal(status: 'toggle' | 'close' | 'show'): void {
-    const actions: { [key: string]: () => void } = {
-        'toggle': () => isModalActive.value = !isModalActive.value,
-        'close': () => isModalActive.value = false,
-        'show': () => isModalActive.value = true,
+    const actions: Record<'toggle' | 'close' | 'show', () => void> = {
+        'toggle': () => { isModalActive.value = !isModalActive.value; },
+        'close': () => { isModalActive.value = false; },
+        'show': () => { isModalActive.value = true; },
     };
 
-    getValueFromObject([status], actions, () => console.warn(`Invalid status: ${status}`))();
+    getValueFromObject([status], actions, () => () => console.warn(`Invalid status: ${status}`))();
 }
 
 </script>

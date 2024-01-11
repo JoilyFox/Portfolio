@@ -1,5 +1,13 @@
-<script setup>
+<template>
+    <span
+        class="material-symbols-outlined"
+        :style="[symbolStyles]"
+    >
+        {{icon}}
+   </span>
+</template>
 
+<script setup lang="ts">
 import { computed } from "vue";
 
 const props = defineProps({
@@ -29,17 +37,6 @@ const symbolStyles = computed(() => ({
     'font-variation-settings': `'FILL' ${ props.fill }, 'wght' ${ props.wght }, 'GRAD' ${ props.grad }, 'opsz' ${ props.opsz }`,
 }));
 </script>
-
-<template>
-
-    <span
-        class="material-symbols-outlined"
-        :style="[symbolStyles]"
-    >
-     {{icon}}
-   </span>
-
-</template>
 
 
 

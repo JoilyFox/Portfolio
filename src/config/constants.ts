@@ -9,7 +9,7 @@ export const NO_IMAGE_PATH = IMAGE_PATH + 'common/no-image.jpg'
 export const WEB_APPS_IMAGE_PATH = IMAGE_PATH + 'works/web-apps/';
 export const MAIN_IMAGE_NAME = 'main.jpg';
 
-export const MEDIA_QUERY_SIZE_MAP = {
+export const MEDIA_QUERY_SIZE_MAP: { [key: string]: number } = {
     'sm': 640,
     'md': 768,
     'lg': 1024,

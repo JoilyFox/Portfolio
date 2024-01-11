@@ -54,6 +54,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, watch, inject } from 'vue';
+import type { Ref } from 'vue'
 import { PROVIDE_PROPS_NAMES } from "@/config/constants";
 import { getValueFromObject } from "@/helpers/helpers";
 import Icon from "@/components/Common/Icon.vue";
@@ -99,8 +100,8 @@ const props = defineProps({
 
 const emit = defineEmits(['close']);
 
-const bodyDOMRef = inject(PROVIDE_PROPS_NAMES.bodyDOM);
-const allContentRef = inject(PROVIDE_PROPS_NAMES.allContentRef);
+const bodyDOMRef = inject<Ref<HTMLElement>>(PROVIDE_PROPS_NAMES.bodyDOM);
+const allContentRef = inject<Ref<HTMLElement>>(PROVIDE_PROPS_NAMES.allContentRef);
 
 watch(() => props.show, () => {
     if (props.show) {
@@ -113,20 +114,35 @@ watch(() => props.show, () => {
 /**
  * Change modal state
  */
- const makeAppBody = (status: 'disabled' | 'active'): void => {
-    const actions: { [key: string]: () => void } = {
+const makeAppBody = (status: 'disabled' | 'active'): void => {
+    const setBodyStyle = (style: string | null) => {
+        if (bodyDOMRef?.value) {
+            bodyDOMRef.value.style.overflow = style ?? '';
+        }
+    };
+
+    const updateAllContentClass = (action: 'add' | 'remove') => {
+        if (allContentRef?.value) {
+            allContentRef.value.classList[action]('modal-active');
+        }
+    };
+
+    const actions: Record<'disabled' | 'active', () => void> = {
         'disabled': () => {
-            bodyDOMRef.value.style.overflow = 'hidden';
-            allContentRef.value.classList.add('modal-active');
+            setBodyStyle('hidden');
+            updateAllContentClass('add');
         },
         'active': () => {
-            bodyDOMRef.value.style.overflow = null;
-            allContentRef.value.classList.remove('modal-active');
+            setBodyStyle(null);
+            updateAllContentClass('remove');
         },
     };
 
-    getValueFromObject([status], actions, () => console.warn(`Invalid status: ${status}`))();
-}
+    const actionFunction = getValueFromObject([status], actions, () => () => console.warn(`Invalid status: ${status}`));
+    if (actionFunction) {
+        actionFunction();
+    }
+};
 
 const close = () => {
     if (props.closeable) {
@@ -134,7 +150,7 @@ const close = () => {
     }
 };
 
-const closeOnEscape = (e) => {
+const closeOnEscape = (e: KeyboardEvent) => {
     if (e.key === 'Escape' && props.show) {
         close();
     }
@@ -180,42 +196,3 @@ const transitionFuncClass = computed(() => {
 
     
 </script>
-
-<style scoped lang="scss">
-.modal-content {
-    $modal-transition-duration: v-bind('modalTransitionDuration');
-    $modal-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
-
-    &-move,
-    &-enter-active,
-    &-leave-active {
-        transition-duration: $modal-transition-duration;
-        transition-timing-function: $modal-transition-timing-function;
-    }
-
-    &-enter-to, &-leave-from,
-    &-enter-active, &-leave-active {
-        opacity: 1;
-        transform: scale(1);
-    }
-    &-enter-enter, &-leave-to {
-        opacity: 0;
-        transform: scale(1.2);
-    }
-}
-.modal-content {
-    $modal-transition-duration: v-bind('modalTransitionDuration');
-    $modal-transition-timing-function: cubic-bezier(0.165, 0.840, 0.440, 1.000);
-
-    &-enter-active, &-leave-active, &-move {
-        opacity: 1;
-        transition-duration: $modal-transition-duration;
-        transition-timing-function: $modal-transition-timing-function;
-        transition-delay: 100s;
-    }
-    &-enter-enter, &-leave-to {
-        opacity: 0;
-        transform: scale(1.2);
-    }
-}
-</style>
