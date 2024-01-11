@@ -1,12 +1,12 @@
 // Constants
 
-export const IMAGE_PATH = '/img/';
+export const IMAGE_PATH = '/Portfolio/img/';
 
 // Path to fallback image file
-export const NO_IMAGE_PATH = IMAGE_PATH + 'common/no-image.jpg'
+export const NO_IMAGE_PATH = 'common/no-image.jpg'
 
 // Web Apps works
-export const WEB_APPS_IMAGE_PATH = IMAGE_PATH + 'works/web-apps/';
+export const WEB_APPS_IMAGE_PATH = 'works/web-apps';
 export const MAIN_IMAGE_NAME = 'main.jpg';
 
 export const MEDIA_QUERY_SIZE_MAP: { [key: string]: number } = {

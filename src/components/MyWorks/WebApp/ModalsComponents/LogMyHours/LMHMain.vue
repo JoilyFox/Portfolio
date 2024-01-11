@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import ModalLayout from "@/components/MyWorks/WebApp/ModalsComponents/Common/ModalLayout.vue";
-import { getNestedValue } from "@/helpers/helpers";
+import { getNestedValue, getImageUrl } from "@/helpers/helpers";
 import Paragraph from "@/components/MyWorks/WebApp/ModalsComponents/Common/ModalParagraph.vue";
 import Carousel from "@/components/MyWorks/WebApp/ModalsComponents/Common/ModalCarousel.vue";
 import Info from "@/components/MyWorks/WebApp/ModalsComponents/Common/ModalWorkInfo/ModalWorkInfo.vue";
@@ -32,26 +32,26 @@ defineProps({
 
 const carouselData = [
     { 
-        imagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/main.jpg',
+        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/main.jpg`),
     },
     { 
-        imagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/pyramid.jpg',
+        imagePath: getImageUrl(`${NO_IMAGE_PATH}`)
     },
     { 
-        imagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/main.jpg',
+        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/pyramid.jpg`),
     },
-    // { 
-    //     imagePath: NO_IMAGE_PATH,
-    // },
-    // { 
-    //     imagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/pyramid.jpg',
-    // },
     { 
-        imagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/main.jpg',
+        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/main.jpg`),
     },
-    // { 
-    //     imagePath: NO_IMAGE_PATH,
-    // },
+    { 
+        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/pyramid.jpg`),
+    },
+    { 
+        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/main.jpg`),
+    },
+    { 
+        imagePath: getImageUrl(`${NO_IMAGE_PATH}`)
+    },
 ];
 
 const skills = [ SKILLS['laravel'], SKILLS['vue'], SKILLS['inertia'], SKILLS['laravel_nova'], SKILLS['tailwind'], SKILLS['docker'], SKILLS['scss'], SKILLS['gitlab']]

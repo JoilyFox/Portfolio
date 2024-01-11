@@ -1,7 +1,8 @@
 import LogMyHours from "@/components/MyWorks/WebApp/ModalsComponents/LogMyHours/LMHMain.vue";
 import { generateUUID } from "@/helpers/helpers";
 import { WEB_APPS_IMAGE_PATH, MAIN_IMAGE_NAME } from "@/config/constants";
-import type { Component } from 'vue'
+import type { Component } from 'vue';
+import { getImageUrl } from '@/helpers/helpers';
 
 // Data
 interface WebAppDataItem {
@@ -20,7 +21,7 @@ const WEB_APP_DATA: WebAppDataItem[] = [
         description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
         tags: ['store'],
         slug: 'log-my-hours', 
-        mainImagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/' + MAIN_IMAGE_NAME,
+        mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
         contentComponent: LogMyHours,
     },
     {
@@ -29,7 +30,7 @@ const WEB_APP_DATA: WebAppDataItem[] = [
         description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
         tags: ['store'],
         slug: 'web-store1', 
-        mainImagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/' + MAIN_IMAGE_NAME,
+        mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
         contentComponent: LogMyHours,
     },
     {
@@ -38,7 +39,7 @@ const WEB_APP_DATA: WebAppDataItem[] = [
         description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
         tags: ['store'],
         slug: 'web-store2',
-        mainImagePath: WEB_APPS_IMAGE_PATH + 'log-my-hours/' + MAIN_IMAGE_NAME,
+        mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
         contentComponent: LogMyHours,
     },
 ];

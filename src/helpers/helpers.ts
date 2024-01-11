@@ -3,6 +3,7 @@ import { ref } from "vue";
 import { 
     MEDIA_QUERY_SIZE_MAP,
     EMPTY_VALUE,
+    WEB_APPS_IMAGE_PATH, MAIN_IMAGE_NAME, IMAGE_PATH
 } from "@/config/constants";
 
 
@@ -246,6 +247,16 @@ function generateUUID() {
     return `${Math.random().toString(36).substr(2, 9)}`;
 }
 
+/**
+ * Generates a full URL for an image file located in a specific directory.
+ *
+ * @param fileName - The name of the image file.
+ * @returns The fully qualified URL pointing to the image file.
+ */
+function getImageUrl(fileName: string): string {
+    return new URL(`${IMAGE_PATH}${fileName}`, import.meta.url).href;
+}
+
 
 
 // Export
@@ -255,5 +266,6 @@ export {
     isScreenSize,
     getValueOrFallback,
     getNestedValue,
-    generateUUID
+    generateUUID,
+    getImageUrl
 }
