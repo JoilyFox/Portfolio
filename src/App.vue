@@ -102,16 +102,16 @@ onMounted(() => {
 /**
  * Control the sidebar, depending on which page is active
  */
-router.afterEach((to) => { 
-	if (to.path.startsWith(router.resolve({ name: 'home' }).href)) {
+router.afterEach((to) => {
+	if (to.path.startsWith(router.resolve({ name: 'home' }).fullPath)) {
 		makeMenu('full');
 	}
 	
-	if (to.path.startsWith(router.resolve({ name: 'myWorks' }).href)) {
+	if (to.path.startsWith(router.resolve({ name: 'myWorks' }).fullPath)) {
 		makeMenu('compact');
 	}
 	
-	if (to.path.startsWith(router.resolve({ name: 'contacts' }).href)) {
+	if (to.path.startsWith(router.resolve({ name: 'contacts' }).fullPath)) {
 		makeMenu('compact');
 	}
 });

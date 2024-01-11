@@ -1,6 +1,6 @@
 // Constants
 
-export const IMAGE_PATH = '/src/assets/img/';
+export const IMAGE_PATH = '/img/';
 
 // Path to fallback image file
 export const NO_IMAGE_PATH = IMAGE_PATH + 'common/no-image.jpg'
