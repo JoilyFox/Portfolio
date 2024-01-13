@@ -10,7 +10,7 @@
             In a two-person team, I led as a full-stack developer, overseeing project initiation, driving feature innovation, and ensuring quality through detailed bug fixing and staging management.
         </Paragraph>
 
-        <Carousel :carouselData="carouselData"/>
+        <Carousel :data="carouselData"/>
     </ModalLayout>
 </template>
 
@@ -35,10 +35,10 @@ const carouselData = [
         imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/main.jpg`),
     },
     { 
-        imagePath: getImageUrl(`${NO_IMAGE_PATH}`)
+        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/main.jpg`),
     },
     { 
-        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/pyramid.jpg`),
+        imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/main.jpg`),
     },
     { 
         imagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/main.jpg`),

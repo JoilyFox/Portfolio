@@ -45,3 +45,86 @@
         }
     }
 }
+
+
+// Carousel
+.webAppModalCarousel {
+    max-height: 492px;
+
+    .f-carousel {
+        --f-carousel-spacing: 6px;
+        max-width: 100%;
+        height: 300px;
+        margin: 0 auto;
+
+        &__slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 60%;
+            transition: .3s all;
+            transform: scale(0.85);
+
+            &.is-selected {
+                transform: scale(1.05);
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            @media screen and (max-width: $md) {
+                max-width: 70%;
+
+                img {
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+            @media screen and (max-width: $sm) {
+                max-width: 80%;
+            }
+        }
+
+        &__nav {
+            .f-button {
+                background-color: #00000030;
+                transition: .2s;
+
+                &:hover {
+                    background-color: #00000070;
+                }
+
+                svg {
+                    stroke: white;
+                }
+            }
+        }
+    }
+
+    .f-thumbs {
+        --f-thumb-height: 65px;
+
+        @media screen and (max-width: $md) {
+            --f-thumb-height: 40px;
+        }
+        @media screen and (max-width: 430px) {
+            max-width: 80vw;
+        }
+    }
+
+    .f-carousel__dot {
+        background-color: $primary-black !important;
+    }
+}
+
+.carousel-modal-transition {
+    &-enter-to, &-leave-from {
+        opacity: 1;
+        transition: .3s;
+    }
+    &-enter-from, &-leave-to {
+        opacity: 0;
+    }
+}
