@@ -2,7 +2,7 @@
     <teleport to="body">
         <!-- Modal bg  -->
         <transition leave-active-class="duration-200">
-            <div v-show="show" class="py-3 fixed flex items-center justify-center inset-0 px-3 z-50" scroll-region>
+            <div v-show="show" class="py-3 fixed flex flex-col items-center justify-center inset-0 px-3 z-50" scroll-region>
                 <transition
                     :enter-active-class="`${transitionFuncClass} ${transitionDurationClass}`"
                     enter-from-class="opacity-0"
@@ -27,7 +27,7 @@
                 >
                     <div
                         v-show="show"
-                        class="bg-white shadow-lg transform transition-all sm:mx-auto flex flex-col overflow-hidden md:mb-16"
+                        class="bg-white shadow-lg flex-1 transform transition-all sm:mx-auto flex flex-col overflow-hidden md:mb-16"
                         :class="[widthClass, additionalBodyClasses, maxHeight]"
                     >   
                         <!-- Close btn -->

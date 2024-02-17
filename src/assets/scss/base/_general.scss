@@ -18,9 +18,14 @@
 .paragraph-light-color {
     color: $paragraph-light-font;
 }
-
 .paragraph-dark-color {
     color: $paragraph-dark-font;
+}
+.caption-dark-color {
+    color: $caption-dark-font;
+}
+.caption-medium-dark-color {
+    color: $caption-medium-dark-font;
 }
 
 html, body, #app {

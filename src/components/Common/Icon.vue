@@ -1,6 +1,6 @@
 <template>
     <span
-        class="material-symbols-outlined"
+        class="material-symbols-outlined select-none"
         :style="[symbolStyles]"
     >
         {{icon}}

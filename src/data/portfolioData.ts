@@ -24,24 +24,24 @@ const WEB_APP_DATA: WebAppDataItem[] = [
         mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
         contentComponent: LogMyHours,
     },
-    {
-        id: generateUUID(),
-        title: 'Test 2',
-        description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
-        tags: ['store'],
-        slug: 'web-store1', 
-        mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
-        contentComponent: LogMyHours,
-    },
-    {
-        id: generateUUID(),
-        title: 'Test 333',
-        description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
-        tags: ['store'],
-        slug: 'web-store2',
-        mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
-        contentComponent: LogMyHours,
-    },
+    // {
+    //     id: generateUUID(),
+    //     title: 'Test 2',
+    //     description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
+    //     tags: ['store'],
+    //     slug: 'web-store1', 
+    //     mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
+    //     contentComponent: LogMyHours,
+    // },
+    // {
+    //     id: generateUUID(),
+    //     title: 'Test 333',
+    //     description: 'A web store with basic functionality and an admin panel. Written in Laravel.',
+    //     tags: ['store'],
+    //     slug: 'web-store2',
+    //     mainImagePath: getImageUrl(`${WEB_APPS_IMAGE_PATH}/log-my-hours/${MAIN_IMAGE_NAME}`),
+    //     contentComponent: LogMyHours,
+    // },
 ];
 
 // Tags are using for sorting works on the web apps page 

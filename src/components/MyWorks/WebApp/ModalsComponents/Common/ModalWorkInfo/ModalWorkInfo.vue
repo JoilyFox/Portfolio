@@ -1,5 +1,5 @@
 <template>
-    <div class="text-[#676767] font-medium flex flex-col gap-y-2 mb-4">
+    <div class="caption-medium-dark-color font-medium flex flex-col gap-y-2 mt-1">
         <!-- Development duration -->
         <InfoItem
             icon="calendar_month"
@@ -14,11 +14,18 @@
             iconTooltip="Client name"
         />
 
+        <!-- Role -->
+        <InfoItem
+            icon="badge"
+            :value="role"
+            iconTooltip="Role"
+        />
+
         <!-- Skills -->
         <InfoSkillsItem
-            icon="lightbulb"
+            icon="code"
             :valueArray="skills"
-            iconTooltip="Skills"
+            iconTooltip="Development technologies"
         />
     </div>
 </template>
@@ -38,9 +45,13 @@ defineProps({
         type: Object,
         default: null
     },
+    role: {
+        type: String,
+        default: null
+    },
     skills: {
         type: Array,
         default: null
     },
-})
+});
 </script>

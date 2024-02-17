@@ -12,7 +12,6 @@
         width: 100%;
         padding-top: 4px;
         padding-bottom: 10px;
-        margin-bottom: 16px;
         border-bottom: solid 1px $paragraph-dark-underline;
     }
 
@@ -48,13 +47,18 @@
 
 
 // Carousel
+
+$carousel-viewport-height: 300px;
+$carousel-thumbs-height-desktop: 65px;
+$carousel-thumbs-height-mobile: 30px;
+
 .webAppModalCarousel {
     max-height: 492px;
 
     .f-carousel {
         --f-carousel-spacing: 6px;
         max-width: 100%;
-        height: 300px;
+        height: $carousel-viewport-height;
         margin: 0 auto;
 
         &__slide {
@@ -63,7 +67,9 @@
             align-items: center;
             max-width: 60%;
             transition: .3s all;
+            min-height: 300px;
             transform: scale(0.85);
+            // box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
             &.is-selected {
                 transform: scale(1.05);
@@ -96,6 +102,15 @@
                     background-color: #00000070;
                 }
 
+                @media screen and (max-width: $md) {
+                    &:hover {
+                        background-color: #00000030;
+                    }
+                    &:active {
+                        background-color: #00000070;
+                    }
+                }
+
                 svg {
                     stroke: white;
                 }
@@ -104,10 +119,14 @@
     }
 
     .f-thumbs {
-        --f-thumb-height: 65px;
+        &__slide {
+            height: $carousel-thumbs-height-desktop;
+        }
 
         @media screen and (max-width: $md) {
-            --f-thumb-height: 40px;
+            &__slide {
+                height: $carousel-thumbs-height-mobile;
+            }
         }
         @media screen and (max-width: 430px) {
             max-width: 80vw;
@@ -116,6 +135,21 @@
 
     .f-carousel__dot {
         background-color: $primary-black !important;
+    }
+}
+
+.webAppModalCarouselWrapper {
+    &.carouselWrapperHeight {
+        min-height: calc($carousel-viewport-height + $carousel-thumbs-height-desktop + 20px);
+
+        @media screen and (max-width: $md) {
+            min-height: calc($carousel-viewport-height + $carousel-thumbs-height-mobile + 20px);
+        }
+        
+        
+        @media screen and (max-width: $sm) {
+            min-height: calc($carousel-viewport-height + $carousel-thumbs-height-mobile);
+        }
     }
 }
 

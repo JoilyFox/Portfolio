@@ -7,13 +7,18 @@
 <script setup lang="ts">
 import { Fancybox } from "@fancyapps/ui";
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
-import { onMounted, onUpdated, onUnmounted, ref } from 'vue';
+import { onMounted, onUpdated, onUnmounted, ref, getCurrentInstance  } from 'vue';
+import type { ModalCarouselItem } from '@/types/components/modalCarousele';
 
 const props = defineProps({
   	options: {
 		type: Object,
 		default: {}
-	}
+	},
+	data: {
+		type: Array as PropType<ModalCarouselItem[]>,
+		default: []
+	},
 });
 
 const container = ref(null);
@@ -40,6 +45,21 @@ onUpdated(() => {
 onUnmounted(() => {
   	Fancybox.destroy();
 });
+
+// Function to open a specific slide
+function openFancyBoxSlide(id: string): void {
+    const index = props.data.findIndex((item: ModalCarouselItem) => item.id === id);
+    if (index !== -1) {
+        Fancybox.show(
+            props.data.map((item: ModalCarouselItem) => ({ src: item.imagePath, opts: { caption: item.caption || '' } })),
+            {
+                startIndex: index,
+            }
+        );
+    }
+}
+
+defineExpose({ openFancyBoxSlide });
 </script>
 
 <style lang="scss">
