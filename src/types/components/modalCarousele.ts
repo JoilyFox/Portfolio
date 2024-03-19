@@ -3,3 +3,7 @@ export interface ModalCarouselItem {
     imagePath: string;
     caption?: string;
 }
+
+export interface ModalCarouse {
+    openFancyBoxSlide: (id: string) => void;
+}

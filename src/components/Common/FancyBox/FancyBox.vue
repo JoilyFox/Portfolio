@@ -7,8 +7,10 @@
 <script setup lang="ts">
 import { Fancybox } from "@fancyapps/ui";
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
-import { onMounted, onUpdated, onUnmounted, ref, getCurrentInstance  } from 'vue';
+import { onMounted, onUpdated, onUnmounted, ref  } from 'vue';
 import type { ModalCarouselItem } from '@/types/components/modalCarousele';
+
+import type { PropType } from 'vue';
 
 const props = defineProps({
   	options: {

@@ -3,7 +3,7 @@
         <div class="webAppModalCarousel" ref="carouselViewport">
             <transition name="carousel-modal-transition">
                 <FancyBox 
-                    :data="data"
+                    :data="data as ModalCarouselItem[]"
                     :options="{ Carousel: { infinite: isInfinite } }"
                     ref="fancyBoxGallery"
                     v-if="isCarouselMounted"
@@ -41,6 +41,10 @@ import { getNestedValue, isScreenSize } from "@/helpers/helpers";
 import { NO_IMAGE_PATH } from "@/config/constants";
 import { MODAL_TRANSITION_DURATION } from "@/config/components/webAppModalConstants";
 
+import type { ModalCarouselItem } from '@/types/components/modalCarousele';
+import type { FancyBox as FancyBoxType } from '@/types/components/fancyBox';
+import type { ComponentPublicInstance  } from 'vue';
+
 const props = defineProps({
     data: {
         type: Array,
@@ -62,7 +66,7 @@ const props = defineProps({
 
 const carouselViewport = ref(null);
 const isCarouselMounted = ref(false);
-const fancyBoxGallery = ref(null);
+const fancyBoxGallery = ref<ComponentPublicInstance & FancyBoxType | null>(null);
 
 const carouselOptions = { 
     infinite: props.isInfinite,

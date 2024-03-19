@@ -77,10 +77,10 @@ import ShowSlideBtn from "@/components/MyWorks/WebApp/ModalsComponents/Common/Mo
 
 import { ref } from "vue";
 import { getNestedValue, getImageUrl } from "@/helpers/helpers";
-import { WEB_APPS_IMAGE_PATH, NO_IMAGE_PATH } from "@/config/constants";
+import { WEB_APPS_IMAGE_PATH } from "@/config/constants";
 import { SKILLS } from "@/data/portfolioData";
 
-import type { ModalCarouselItem } from '@/types/components/modalCarousele';
+import type { ModalCarouselItem, ModalCarouse } from '@/types/components/modalCarousele';
 
 defineProps({
     modalData: {
@@ -89,7 +89,7 @@ defineProps({
     },
 });
 
-const modalCarousel_1 = ref(null);
+const modalCarousel_1 = ref<ModalCarouse | null>(null);
 
 const carouselData: ModalCarouselItem[] = [
     {

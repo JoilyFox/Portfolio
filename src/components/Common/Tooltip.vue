@@ -37,6 +37,8 @@ import { ref, computed, onUnmounted, nextTick, watch, inject, onMounted } from '
 import { getValueFromObject } from "@/helpers/helpers";
 import { PROVIDE_PROPS_NAMES } from "@/config/constants";
 
+import type { Ref } from 'vue';
+
 const props = defineProps({
     /**
      * Determines the side where the tooltip appears relative to the target.
@@ -203,7 +205,7 @@ const isVisible = ref(false);
 /**
  * Variable to hold a timeout ID for the hover delay functionality.
  */
-let hoverTimeout = null;
+let hoverTimeout: number | null = null;
 
 /**
  * Reactive array of classes that determine the current side of the tooltip.
@@ -233,12 +235,12 @@ const currentAlign = ref(props.tooltipAlign);
 /**
  * Reference to the target element.
  */
-const targetRef = ref(null);
+const targetRef: Ref<HTMLElement | null> = ref(null);
 
 /**
  * Reference to the tooltip element.
  */
-const tooltipRef = ref(null);
+const tooltipRef: Ref<HTMLElement | null> = ref(null);
 
 /**
  * Shows the tooltip with a delay.
@@ -249,7 +251,7 @@ const showTooltip = () => {
         nextTick(() => {
             isVisible.value = true;
         });
-    }, props.hoverDelay);
+    }, props.hoverDelay) as unknown as number;
 };
 
 /**
@@ -372,7 +374,10 @@ const calculateOptimalSide = () => {
     if (!targetRef.value || props.tooltipSide !== SIDES.AUTO) return [];
 
     // Get tooltip dimensions
+    if (!mainContentRef.value) return [];
     const appContentRect = mainContentRef.value.getBoundingClientRect();
+
+    if (!targetRef.value.parentElement) return [];
     const targetRect = targetRef.value.parentElement.getBoundingClientRect();
 
     // Calculate available space
@@ -405,22 +410,26 @@ const calculateOptimalSide = () => {
  * Calculates the optimal align for the tooltip based on available space.
  */
 const calculateOptimalAlign = () => {
-    if (!targetRef.value || props.tooltipAlign !== ALIGNMENTS.AUTO) return [];
+    if (!targetRef.value || props.tooltipAlign !== ALIGNMENTS.AUTO || !mainContentRef.value) return [];
 
     // Get tooltip dimensions
     const appContentRect = mainContentRef.value.getBoundingClientRect();
+
+    if (!targetRef.value.parentElement) return [];
     const targetRect = targetRef.value.parentElement.getBoundingClientRect();
+
+    if (!tooltipRef.value) return [];
     const tooltipHeight = tooltipRef.value.offsetHeight + 50;
     const tooltipWidth = tooltipRef.value.offsetWidth + 20;
 
     const calculateAlignMap = {
         [SIDES.TOP]: {
             [ALIGN_PREFERENCES.START]: appContentRect.right - targetRect.left > tooltipWidth ? ALIGNMENTS.START : ALIGNMENTS.END,
-            [ALIGN_PREFERENCES.END]: appContentRect.left - targetRect.rigth > tooltipWidth ? ALIGNMENTS.END : ALIGNMENTS.START,
+            [ALIGN_PREFERENCES.END]: appContentRect.left - targetRect.right > tooltipWidth ? ALIGNMENTS.END : ALIGNMENTS.START,
         },
         [SIDES.BOTTOM]: {
             [ALIGN_PREFERENCES.START]: appContentRect.right - targetRect.left > tooltipWidth ? ALIGNMENTS.START : ALIGNMENTS.END,
-            [ALIGN_PREFERENCES.END]: appContentRect.left - targetRect.rigth > tooltipWidth ? ALIGNMENTS.END : ALIGNMENTS.START,
+            [ALIGN_PREFERENCES.END]: appContentRect.left - targetRect.right > tooltipWidth ? ALIGNMENTS.END : ALIGNMENTS.START,
         },
         [SIDES.LEFT]: {
             [ALIGN_PREFERENCES.START]: appContentRect.bottom - targetRect.top > tooltipHeight ? ALIGNMENTS.START : ALIGNMENTS.END,
