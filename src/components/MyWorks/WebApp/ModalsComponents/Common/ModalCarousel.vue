@@ -1,6 +1,6 @@
 <template>
     <div class="webAppModalCarouselWrapper" :class="[carouselHeightClass, marginTop]">
-        <div class="webAppModalCarousel" ref="carouselViewport">
+        <div class="webAppModalCarousel pb-7" ref="carouselViewport">
             <transition name="carousel-modal-transition">
                 <FancyBox 
                     :data="data as ModalCarouselItem[]"
